@@ -1,0 +1,38 @@
+.card {
+	border-radius: 1vw;
+	overflow: hidden;
+	background-color: black;
+	position: relative;
+	z-index: 0;
+}
+
+.card-view {
+	color: white;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1.5vw;
+	font-weight: 500;
+	z-index: -1;
+}
+
+.card-overlay {
+	width: 20vw;
+	height: 20vw;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 100%;
+}
+
+.card-overlay:hover {
+	opacity: 50%;
+	cursor: pointer;
+}
+
+.card-img {
+	object-fit: cover;
+	min-width: 100%;
+	min-height: 100%;
+}

@@ -1,0 +1,40 @@
+.save {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.save-form {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 1vw;
+	text-align: center;
+	border: 0.2vw solid #3DA5FF;
+	padding: 1vw 1vw;
+	border-radius: 2vw;
+	background-color: #3da4ff29;
+}
+
+.input-container {
+	width: 50%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	height: 15.5vw;
+}
+
+.textarea {
+	width: 50%;
+	resize: none;
+	height: 15.5vw;
+	min-height: 3vw;
+	font-size: 2vw;
+	text-align: center;
+	border-radius: 2vw;
+	border: 0.2vw solid #3DA5FF;
+	background-color: #01121F;
+	color: #3DA5FF;
+}

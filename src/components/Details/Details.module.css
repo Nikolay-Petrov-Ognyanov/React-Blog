@@ -1,0 +1,36 @@
+.details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	gap: 1.5vw;
+}
+
+.details-img-container {
+	height: 41vw;
+	width: 41vw;
+	border-radius: 1.5vw;
+	overflow: hidden;
+}
+
+.details-img {
+	object-fit: cover;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.details-text-container {
+	height: 41vw;
+	width: 41vw;
+	border: 0.2vw solid #3DA5FF;
+	border-radius: 1.5vw;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 1.5vw;
+	text-align: center;
+	padding: 0 1.5vw;
+}

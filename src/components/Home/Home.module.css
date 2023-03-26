@@ -1,0 +1,9 @@
+.home {
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 1vw;
+	margin-bottom: 0.5vw;
+}

@@ -1,0 +1,28 @@
+header {
+	position: fixed;
+	z-index: 1;
+	background-color: #01121F;
+	width: 100%;
+	padding: 0.7vw 20vw;
+	border-bottom: #3DA5FF 0.25vw solid;
+}
+
+.nav-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+nav li {
+	display: flex;
+}
+
+.nav-list a {
+	color: #3DA5FF;
+	font-size: 2vw;
+	text-decoration: none;
+	font-weight: 700;
+}
+
+.nav-list a:hover {
+	text-shadow: 0 0 2vw #3DA5FF;
+}
