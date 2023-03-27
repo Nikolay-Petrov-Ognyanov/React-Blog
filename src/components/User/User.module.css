@@ -1,4 +1,4 @@
-.auth-form {
+.user-form {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
@@ -12,7 +12,7 @@
 	margin-bottom: 1vw;
 }
 
-.auth-submit {
+.user-submit {
 	width: 100%;
 	height: 3.6vw;
 	font-size: 2vw;
@@ -23,15 +23,15 @@
 	font-weight: bold;
 }
 
-.auth-submit:hover {
+.user-submit:hover {
 	cursor: pointer;
 	color: azure;
 	box-shadow: #3DA5FF 0 0 1vw 0.2vw;
 	text-shadow: 0 0 1vw azure;
 }
 
-.auth-submit:disabled,
-.auth-submit:disabled:hover {
+.user-submit:disabled,
+.user-submit:disabled:hover {
 	cursor: auto;
 	background-color: #446786;
 	box-shadow: none;

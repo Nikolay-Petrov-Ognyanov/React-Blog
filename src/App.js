@@ -6,8 +6,8 @@ import * as postService from "./services/postService"
 import './App.css';
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
-import { Register } from "./components/Auth/Register";
-import { Login } from "./components/Auth/Login";
+import { Register } from "./components/User/Register";
+import { Login } from "./components/User/Login";
 import { Create } from "./components/Save/Create";
 import { Edit } from "./components/Save/Edit";
 import { Details } from "./components/Details/Details";

@@ -1,5 +1,5 @@
 import { useState } from "react"
-import style from "./Auth.module.css"
+import style from "./User.module.css"
 
 export const Register = ({
 }) => {
@@ -64,7 +64,7 @@ export const Register = ({
 		<section className="register">
 			<h1>Welcome!</h1>
 
-			<form className={style["auth-form"]}>
+			<form className={style["user-form"]}>
 				<input
 					type="email"
 					name="email"
@@ -100,7 +100,7 @@ export const Register = ({
 
 				<button
 					type="submit"
-					className={style["auth-submit"]}
+					className={style["user-submit"]}
 					disabled={Object.values(errors).some(entry => entry !== "")
 						? true
 						: Object.values(inputs).some(entry => entry === "")}
