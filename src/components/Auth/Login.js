@@ -34,13 +34,13 @@ export const Login = ({
 
 			if (name === "email") {
 				if (!value) {
-					stateObject[name] = "Please enter email."
+					stateObject[name] = "Please enter an email."
 				} else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) === false) {
 					stateObject[name] = "Please enter a valid email."
 				}
 			} else if (name === "password") {
 				if (!value) {
-					stateObject[name] = "Please enter password."
+					stateObject[name] = "Please enter a password."
 				} else if (value.length < 5) {
 					stateObject["password"] = "Password must be at 5 least characters long."
 				}
@@ -48,14 +48,21 @@ export const Login = ({
 
 			return stateObject
 		})
+	}
 
+	const handleLoginSubmit = (event) => {
+		event.preventDefault()
+
+		const { email, password } = Object.fromEntries(new FormData(event.target))
+
+		console.log(email, password)
 	}
 
 	return (
 		<section className="login">
 			<h1>Welcome!</h1>
 
-			<form className={style["auth-form"]}>
+			<form className={style["auth-form"]} onSubmit={handleLoginSubmit} >
 				<input
 					type="email"
 					name="email"
@@ -79,16 +86,17 @@ export const Login = ({
 				/>
 
 				<button
+					type="submit"
+					className={style["auth-submit"]}
 					disabled={Object.values(errors).some(entry => entry !== "")
 						? true
 						: Object.values(inputs).some(entry => entry === "")}
-					className={style["auth-submit"]}
 				>Login
 				</button>
 			</form>
 
-			{errors.email && <p className={style["errors"]}>{errors.email}</p>}
-			{errors.password && <p className={style["errors"]}>{errors.password}</p>}
+			{errors.email && <p className="errors">{errors.email}</p>}
+			{errors.password && <p className="errors">{errors.password}</p>}
 		</section>
 	)
 }

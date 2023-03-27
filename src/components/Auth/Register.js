@@ -34,13 +34,13 @@ export const Register = ({
 
 			if (name === "email") {
 				if (!value) {
-					stateObject[name] = "Please enter email."
+					stateObject[name] = "Please enter an email."
 				} else if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value) === false) {
 					stateObject[name] = "Please enter a valid email."
 				}
 			} else if (name === "password") {
 				if (!value) {
-					stateObject[name] = "Please enter password."
+					stateObject[name] = "Please enter a password."
 				} else if (value.length < 5) {
 					stateObject["password"] = "Password must be at 5 least characters long."
 				} else if (value >= 5 && inputs.confirmPassword && value !== inputs.confirmPassword) {
@@ -50,7 +50,7 @@ export const Register = ({
 				}
 			} else if (name === "confirmPassword") {
 				if (inputs.password && !value) {
-					stateObject[name] = "Please confirm password."
+					stateObject[name] = "Please confirm the password."
 				} else if (value !== inputs.password) {
 					stateObject[name] = "Passwords must match."
 				}
@@ -99,10 +99,11 @@ export const Register = ({
 				/>
 
 				<button
+					type="submit"
+					className={style["auth-submit"]}
 					disabled={Object.values(errors).some(entry => entry !== "")
 						? true
 						: Object.values(inputs).some(entry => entry === "")}
-					className={style["auth-submit"]}
 				>Register
 				</button>
 			</form>

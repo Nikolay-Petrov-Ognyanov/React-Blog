@@ -17,7 +17,7 @@
 	height: 3.6vw;
 	font-size: 2vw;
 	text-align: center;
-	border-radius: 2.5vw;
+	border-radius: 2vw;
 	border-style: none;
 	background-color: #3DA5FF;
 	font-weight: bold;
@@ -25,8 +25,8 @@
 
 .auth-submit:hover {
 	cursor: pointer;
-	box-shadow: #3DA5FF 0 0 1vw 0.2vw;
 	color: azure;
+	box-shadow: #3DA5FF 0 0 1vw 0.2vw;
 	text-shadow: 0 0 1vw azure;
 }
 

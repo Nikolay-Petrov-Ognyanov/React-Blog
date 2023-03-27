@@ -6,7 +6,7 @@ export const Card = ({
 	post
 }) => {
 	return (
-		<Link to={`/${post._id}`}>
+		<Link to={`/${post._id}`} className={style["card-link-wrapper"]} >
 			<div className={style["card"]}>
 				<p className={style["card-view"]}>View Details</p>
 				<div className={style["card-overlay"]}>

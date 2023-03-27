@@ -36,20 +36,20 @@ editHandler
 
 			if (name === "title") {
 				if (!value) {
-					stateObject[name] = "Please provide a title."
+					stateObject[name] = "Please enter a title."
 				} else if (!value.length > 5) {
 					stateObject[name] = "Title could be at most 5 characters long."
 				}
 			} else if (name === "imageUrl") {
 				if (!value) {
-					stateObject[name] = "Please provide an image link."
+					stateObject[name] = "Please enter an image link."
 				} else if (/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
 					.test(value) === false) {
-					stateObject[name] = "Please provide a vaild image link."
+					stateObject[name] = "Please enter a vaild image link."
 				}
 			} else if (name === "description") {
 				if (!value) {
-					stateObject[name] = "Please provide a description."
+					stateObject[name] = "Please enter a description."
 				} else if (value.length > 225) {
 					stateObject[name] = "Description could be at most 225 characters long."
 				}
@@ -80,7 +80,7 @@ editHandler
 						type="text"
 						name="title"
 						id="title"
-						placeholder="Title"
+						placeholder="Enter title"
 						value={inputs.title}
 						onChange={handleInputChange}
 						onBlur={validateInput}
@@ -91,7 +91,7 @@ editHandler
 						type="text"
 						name="imageUrl"
 						id="imageUrl"
-						placeholder="Image"
+						placeholder="Enter image link"
 						value={inputs.imageUrl}
 						onChange={handleInputChange}
 						onBlur={validateInput}
@@ -113,7 +113,7 @@ editHandler
 					className={style["textarea"]}
 					name="description"
 					id="description"
-					placeholder="Description"
+					placeholder="Enter description"
 					cols={20}
 					rows={5}
 					value={inputs.description}

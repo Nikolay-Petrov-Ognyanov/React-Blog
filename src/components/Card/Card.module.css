@@ -36,3 +36,8 @@
 	min-width: 100%;
 	min-height: 100%;
 }
+
+.card-link-wrapper {
+	border-radius: 1vw;
+	/* background-color: yellowgreen; */
+}

@@ -11,15 +11,6 @@ body {
 	color: #3DA5FF;
 }
 
-i {
-	color: #3DA5FF;
-	font-size: 5vw;
-}
-
-i:hover {
-	text-shadow: 0 0 1.5vw #3DA5FF;
-} 
-
 main {
 	display: flex;
 	flex-direction: column;
@@ -42,7 +33,7 @@ h1 {
 	height: 3.6vw;
 	font-size: 2vw;
 	text-align: center;
-	border-radius: 2.5vw;
+	border-radius: 2vw;
 	border: 0.2vw solid #3DA5FF;
 	background-color: #01121F;
 	color: #3DA5FF;
@@ -70,10 +61,11 @@ h1 {
 
 .icon-button:hover {
 	cursor: pointer;
-	text-shadow: 0 0 1.5vw #3DA5FF;
+	background-color: azure;
+	box-shadow: #3DA5FF 0 0 1vw 0.2vw;
 }
 
-.icon-button:disabled{
+.icon-button:disabled {
 	cursor: auto;
 	color: #446786;
 	box-shadow: none;

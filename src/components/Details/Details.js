@@ -26,13 +26,9 @@ export const Details = ({
 				</p>
 
 				<div className="buttons-container">
-					<button className="icon-button">
-						<i className="fa-solid fa-pen-to-square" />
-					</button>
+					<button className="icon-button fa-solid fa-pen-to-square"></button>
 
-					<button className="icon-button">
-						<i className="fa-solid fa-trash-can" />
-					</button>
+					<button className="icon-button fa-solid fa-trash-can"></button>
 				</div>
 			</div>
 		</section>
