@@ -23,7 +23,16 @@ function App() {
 			.catch(error => console.log(error.message))
 	}, [])
 
-	const createHandlerUncontrolled = (postData) => {
+	const createHandler = (postData) => {
+		setPosts(state => [
+			...state,
+			postData
+		])
+
+		navigate("/")
+	}
+
+	const editHandler = (postData) => {
 		setPosts(state => [
 			...state,
 			postData
@@ -41,9 +50,9 @@ function App() {
 					<Route path="/" element={<Home posts={posts} />} />
 					<Route path="/register" element={<Register />} />
 					<Route path="/login" element={<Login />} />
-					<Route path="/create" element={<Create createHandler={createHandlerUncontrolled} />} />
+					<Route path="/create" element={<Create createHandler={createHandler} />} />
 					<Route path="/:postId" element={<Details posts={posts} />} />
-					<Route path="/:postId/edit" element={<Edit />} />
+					<Route path="/:postId/edit" element={<Edit editHandler={editHandler} />} />
 				</Routes>
 			</main>
 		</div>

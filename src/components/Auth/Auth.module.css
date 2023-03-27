@@ -9,6 +9,7 @@
 	border-radius: 2vw;
 	padding: 1.5vw 1.5vw;
 	background-color: #3da4ff29;
+	margin-bottom: 1vw;
 }
 
 .auth-submit {
@@ -29,7 +30,11 @@
 	text-shadow: 0 0 1vw azure;
 }
 
-.errors {
-	margin-top: 0.2vw;
-	text-shadow: 0 0 2vw #3DA5FF;
+.auth-submit:disabled,
+.auth-submit:disabled:hover {
+	cursor: auto;
+	background-color: #446786;
+	box-shadow: none;
+	color: #01121F;
+	text-shadow: none;
 }

@@ -15,6 +15,8 @@
 	padding: 1vw 1vw;
 	border-radius: 2vw;
 	background-color: #3da4ff29;
+	width: 67vw;
+	margin-bottom: 1vw;
 }
 
 .input-container {
@@ -23,13 +25,13 @@
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	height: 15.5vw;
+	height: 15.6vw;
 }
 
 .textarea {
 	width: 50%;
 	resize: none;
-	height: 15.5vw;
+	height: 15.6vw;
 	min-height: 3vw;
 	font-size: 2vw;
 	text-align: center;
@@ -37,4 +39,5 @@
 	border: 0.2vw solid #3DA5FF;
 	background-color: #01121F;
 	color: #3DA5FF;
+	overflow: hidden;
 }

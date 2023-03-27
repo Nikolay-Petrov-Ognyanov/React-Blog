@@ -49,16 +49,15 @@ export const Register = ({
 					stateObject["confirmPassword"] = !inputs.confirmPassword && errors.confirmPassword
 				}
 			} else if (name === "confirmPassword") {
-				if (!value && inputs.password.length >= 5) {
+				if (inputs.password && !value) {
 					stateObject[name] = "Please confirm password."
-				} else if (inputs.password.length >= 5 && value !== inputs.password) {
+				} else if (value !== inputs.password) {
 					stateObject[name] = "Passwords must match."
 				}
 			}
 
 			return stateObject
 		})
-
 	}
 
 	return (
@@ -70,7 +69,7 @@ export const Register = ({
 					type="email"
 					name="email"
 					id="email"
-					placeholder="Email"
+					placeholder="Enter email"
 					className="input"
 					value={inputs.email}
 					onChange={handleInputChange}
@@ -81,7 +80,7 @@ export const Register = ({
 					type="password"
 					name="password"
 					id="password"
-					placeholder="Password"
+					placeholder="Enter password"
 					className="input"
 					value={inputs.password}
 					onChange={handleInputChange}
@@ -92,19 +91,25 @@ export const Register = ({
 					type="password"
 					name="confirmPassword"
 					id="confirmPassword"
-					placeholder="Confirm"
+					placeholder="Confirm password"
 					className="input"
 					value={inputs.confirmPassword}
 					onChange={handleInputChange}
 					onBlur={validateInput}
 				/>
 
-				<button className={style["auth-submit"]}>Register</button>
-
-					{errors.email && <p className={style["errors"]}>{errors.email}</p>}
-					{errors.password && <p className={style["errors"]}>{errors.password}</p>}
-					{errors.confirmPassword && <p className={style["errors"]}>{errors.confirmPassword}</p>}
+				<button
+					disabled={Object.values(errors).some(entry => entry !== "")
+						? true
+						: Object.values(inputs).some(entry => entry === "")}
+					className={style["auth-submit"]}
+				>Register
+				</button>
 			</form>
+
+			{errors.email && <p className="errors">{errors.email}</p>}
+			{errors.password && <p className="errors">{errors.password}</p>}
+			{errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
 		</section>
 	)
 }

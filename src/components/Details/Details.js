@@ -21,7 +21,7 @@ export const Details = ({
 			<div className={style["details-text-container"]}>
 				<h2>{post.title}</h2>
 
-				<p>
+				<p className={style["details-description"]} >
 					{post.description}
 				</p>
 
