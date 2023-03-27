@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 import style from "./User.module.css"
+import { login } from "../../services/userService"
 
 export const Login = ({
 
@@ -55,7 +56,10 @@ export const Login = ({
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		console.log(email, password)
+		login(email, password)
+			.then(userData => {
+			console.log(userData)
+		})
 	}
 
 	return (

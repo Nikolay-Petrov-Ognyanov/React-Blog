@@ -1,7 +1,5 @@
-import { request } from "./requester"
+import * as request from "./requester"
 
 const users = "http://localhost:3030/users"
 
-export const login = (email, password) => {
-    
-}
+export const login = (email, password) => request.post(`${users}/login`, { email, password })
