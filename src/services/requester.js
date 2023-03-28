@@ -1,13 +1,22 @@
 const request = async (method, url, data) => {
     try {
+        const userData = localStorage.getItem("user")
+        const user = JSON.parse(userData || "{}")
+
         let requester
+        let headers = {}
+
+        if (user?.accessToken) {
+            headers["X-Authorization"] = user.accessToken
+        }
 
         if (method === "GET") {
-            requester = fetch(url)
+            requester = fetch(url, { headers })
         } else {
             requester = fetch(url, {
                 method,
                 headers: {
+                    ...headers,
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify(data)

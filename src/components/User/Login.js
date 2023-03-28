@@ -3,11 +3,9 @@ import { useNavigate } from "react-router-dom"
 
 import style from "./User.module.css"
 import { UserContext } from "../../contexts/UserContext"
-import { login } from "../../services/userService"
+import * as userService from "../../services/userService"
 
-export const Login = ({
-
-}) => {
+export const Login = () => {
 	const navigate = useNavigate()
 	const { loginHandler } = useContext(UserContext)
 
@@ -63,7 +61,7 @@ export const Login = ({
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		login(email, password).then(result => {
+		userService.login(email, password).then(result => {
 			if (!result.message) {
 				loginHandler(result)
 				navigate("/")

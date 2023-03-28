@@ -1,11 +1,12 @@
-import { useState, useEffect } from "react"
-import uniqid from "uniqid"
+import { useState, useContext } from "react"
 
 import style from "./Post.module.css"
+import { PostContext } from "../../contexts/PostContext"
+import * as postService from "../../services/postService"
 
-export const Create = ({
-    createHandler
-}) => {
+export const Create = () => {
+    const { createHandler } = useContext(PostContext)
+
     const [inputs, setInputs] = useState({
         title: "",
         imageUrl: "",
@@ -65,9 +66,7 @@ export const Create = ({
 
         const postData = Object.fromEntries(new FormData(event.target))
 
-        postData._id = postData.title
-
-        createHandler(postData)
+        postService.create(postData).then(result => createHandler(result))
     }
 
     return (
@@ -99,14 +98,14 @@ export const Create = ({
                     />
 
                     <div className="buttons-container">
-                        <button className="icon-button"
+                        <button className="button"
                             disabled={Object.values(errors).some(entry => entry !== "")
                                 ? true
                                 : Object.values(inputs).some(entry => entry === "")}
                         >Save
                         </button>
 
-                        <button className="icon-button">Cancel</button>
+                        <button className="button">Cancel</button>
                     </div>
                 </div>
 

@@ -12,15 +12,17 @@ import { Logout } from "./components/User/Logout";
 import { Create } from "./components/Post/Create";
 import { Edit } from "./components/Post/Edit";
 import { Details } from "./components/Details/Details";
+import { useLocalStorage } from "./hooks/useLocalStorage";
 import { UserContext } from "./contexts/UserContext";
+import { PostContext } from "./contexts/PostContext"
 
 function App() {
 	const navigate = useNavigate()
 	const [posts, setPosts] = useState([])
-	const [user, setUser] = useState(null)
+	const [user, setUser] = useLocalStorage("user", null)
 
 	useEffect(() => {
-		postService.loadInitialPosts()
+		postService.getAllPosts()
 			.then(result => setPosts(Object.values(result)))
 			.catch(error => console.log(error.message))
 	}, [])
@@ -57,21 +59,27 @@ function App() {
 			loginHandler,
 			logoutHandler
 		}}>
-			<div className="App">
-				<Header />
+			<PostContext.Provider value={{
+				posts,
+				createHandler,
+				editHandler
+			}}>
+				<div className="App">
+					<Header />
 
-				<main>
-					<Routes>
-						<Route path="/" element={<Home posts={posts} />} />
-						<Route path="/register" element={<Register />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/logout" element={<Logout />} />
-						<Route path="/create" element={<Create createHandler={createHandler} />} />
-						<Route path="/:postId" element={<Details posts={posts} />} />
-						<Route path="/:postId/edit" element={<Edit editHandler={editHandler} />} />
-					</Routes>
-				</main>
-			</div>
+					<main>
+						<Routes>
+							<Route path="/" element={<Home posts={posts} />} />
+							<Route path="/register" element={<Register />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/logout" element={<Logout />} />
+							<Route path="/create" element={<Create />} />
+							<Route path="/:postId" element={<Details />} />
+							<Route path="/:postId/edit" element={<Edit />} />
+						</Routes>
+					</main>
+				</div>
+			</PostContext.Provider>
 		</UserContext.Provider>
 	);
 }

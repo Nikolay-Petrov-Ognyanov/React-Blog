@@ -1,10 +1,11 @@
-import style from "./Details.module.css"
-
+import { useContext } from "react"
 import { useParams } from "react-router-dom"
 
-export const Details = ({
-	posts
-}) => {
+import style from "./Details.module.css"
+import { PostContext } from "../../contexts/PostContext"
+
+export const Details = () => {
+	const { posts } = useContext(PostContext)
 	const { postId } = useParams()
 	const post = posts.find(p => p._id === postId)
 
@@ -17,7 +18,7 @@ export const Details = ({
 					alt={post.title}
 				/>
 			</div>
-			
+
 			<div className={style["details-text-container"]}>
 				<h2 className={style["details-title"]}>
 					{post.title}
@@ -28,11 +29,11 @@ export const Details = ({
 				</p>
 
 				<div className="buttons-container">
-					<button className="icon-button">
+					<button className="button">
 						Like
 					</button>
 
-					<button className="icon-button">
+					<button className="button">
 						Dislike
 					</button>
 				</div>

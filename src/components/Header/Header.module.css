@@ -3,7 +3,8 @@ header {
 	z-index: 1;
 	background-color: #001f3a;
 	width: 100%;
-	padding: 0.65vw 20vw;
+	padding: 0.5vw 13.8vw;
+	border-top: #3DA5FF 0.25vw solid;
 	border-bottom: #3DA5FF 0.25vw solid;
 }
 
@@ -17,13 +18,6 @@ nav li {
 }
 
 .nav-list a {
-	color: #3DA5FF;
-	font-size: 2vw;
+	color: #001f3a;
 	text-decoration: none;
-	font-weight: 700;
-}
-
-.nav-list a:hover {
-	color: azure;
-	text-shadow: 0 0 2vw azure;
 }

@@ -2,11 +2,10 @@ import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import style from "./User.module.css"
-import { register } from "../../services/userService"
+import * as userService from "../../services/userService"
 import { UserContext } from "../../contexts/UserContext"
 
-export const Register = ({
-}) => {
+export const Register = () => {
 	const navigate = useNavigate()
 	const { loginHandler } = useContext(UserContext)
 
@@ -54,14 +53,14 @@ export const Register = ({
 					stateObject[name] = "Password must be at 5 least characters long."
 				} else if (value >= 5 && inputs.confirmPassword && value !== inputs.confirmPassword) {
 					stateObject["confirmPassword"] = "Passwords must match."
-				} else {
-					stateObject["confirmPassword"] = !inputs.confirmPassword && errors.confirmPassword
 				}
 			} else if (name === "confirmPassword") {
-				if (inputs.password && !value) {
-					stateObject[name] = "Please confirm the password."
-				} else if (value.length < 5) {
+				if (!inputs.password && !value) {
+					stateObject["password"] = "Please enter a password."
+				} else if (inputs.password.length < 5) {
 					stateObject["password"] = "Password must be at 5 least characters long."
+				} else if (inputs.password.length >= 5 && !value) {
+					stateObject[name] = "Please confirm the password."
 				} else if (value !== inputs.password) {
 					stateObject[name] = "Passwords must match."
 				}
@@ -76,7 +75,7 @@ export const Register = ({
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		register(email, password).then(result => {
+		userService.register(email, password).then(result => {
 			if (!result.message) {
 				loginHandler(result)
 				navigate("/")
@@ -136,8 +135,8 @@ export const Register = ({
 
 			{errors.email && <p className="errors">{errors.email}</p>}
 			{errors.password && <p className="errors">{errors.password}</p>}
-			{errors.server && <p className="errors">{errors.server}</p>}
 			{errors.confirmPassword && <p className="errors">{errors.confirmPassword}</p>}
+			{errors.server && <p className="errors">{errors.server}</p>}
 		</section>
 	)
 }

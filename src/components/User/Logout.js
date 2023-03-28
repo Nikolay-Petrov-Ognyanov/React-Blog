@@ -2,7 +2,7 @@ import { useEffect, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import { UserContext } from "../../contexts/UserContext"
-import { logout } from "../../services/userService"
+import * as userService from "../../services/userService"
 
 
 export const Logout = () => {
@@ -10,7 +10,7 @@ export const Logout = () => {
     const { user, logoutHandler } = useContext(UserContext)
 
     useEffect(() => {
-        logout(user.accessToken)
+        userService.logout(user.accessToken)
             .then(() => {
                 logoutHandler()
                 navigate("/")

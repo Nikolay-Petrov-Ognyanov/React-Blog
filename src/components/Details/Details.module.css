@@ -8,8 +8,8 @@
 }
 
 .details-img-container {
-	height: 41vw;
-	width: 41vw;
+	height:40vw;
+	width:40vw;
 	border-radius: 2vw;
 	overflow: hidden;
 }
@@ -21,9 +21,9 @@
 }
 
 .details-text-container {
-	height: 41vw;
-	width: 41vw;
-	border: 0.2vw solid #3DA5FF;
+	height:40vw;
+	width:40vw;
+	border: 0.25vw solid #3DA5FF;
 	border-radius: 2vw;
 	word-wrap: break-word;
 	display: flex;

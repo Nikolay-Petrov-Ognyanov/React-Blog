@@ -18,8 +18,8 @@
 }
 
 .card-overlay {
-	width: 20vw;
-	height: 20vw;
+	width:19.5vw;
+	height:19.5vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -39,5 +39,4 @@
 
 .card-link-wrapper {
 	border-radius: 1vw;
-	/* background-color: yellowgreen; */
 }

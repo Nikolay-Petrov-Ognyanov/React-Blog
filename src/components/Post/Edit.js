@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
+import { useState, useContext } from "react"
 
 import style from "./Post.module.css"
+import { PostContext } from "../../contexts/PostContext"
 
-export const Edit = ({
-	editHandler
-}) => {
+export const Edit = () => {
+	const { editHandler } = useContext(PostContext)
+
 	const [inputs, setInputs] = useState({
 		title: "",
 		imageUrl: "",
@@ -98,14 +99,14 @@ export const Edit = ({
 					/>
 
 					<div className="buttons-container">
-						<button className="icon-button"
+						<button className="button"
 							disabled={Object.values(errors).some(entry => entry !== "")
 								? true
 								: Object.values(inputs).some(entry => entry === "")}
 						>Save
 						</button>
 
-						<button className="icon-button">Cancel</button>
+						<button className="button">Cancel</button>
 					</div>
 				</div>
 
