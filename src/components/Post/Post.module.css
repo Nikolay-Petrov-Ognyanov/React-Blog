@@ -1,14 +1,14 @@
-.save {
+.post {
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	justify-content: center;
 }
 
-.save-form {
+.post-form {
 	display: flex;
 	flex-direction: row;
-	align-items: center;
+	/* align-items: center; */
 	gap: 1vw;
 	text-align: center;
 	border: 0.2vw solid #3DA5FF;
@@ -23,15 +23,14 @@
 	width: 50%;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
 	align-items: center;
-	height: 15.6vw;
+	gap: 1vw;
 }
 
 .textarea {
 	width: 50%;
 	resize: none;
-	height: 15.6vw;
+	height: 12.6vw;
 	min-height: 3vw;
 	font-size: 2vw;
 	text-align: center;

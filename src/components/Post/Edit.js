@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react"
 
-import style from "./Save.module.css"
+import style from "./Post.module.css"
 
 export const Edit = ({
-editHandler
+	editHandler
 }) => {
 	const [inputs, setInputs] = useState({
 		title: "",
@@ -37,8 +37,8 @@ editHandler
 			if (name === "title") {
 				if (!value) {
 					stateObject[name] = "Please enter a title."
-				} else if (!value.length > 5) {
-					stateObject[name] = "Title could be at most 5 characters long."
+				} else if (value.length > 16) {
+					stateObject[name] = "Title could be at most 16 characters long."
 				}
 			} else if (name === "imageUrl") {
 				if (!value) {
@@ -70,10 +70,10 @@ editHandler
 	}
 
 	return (
-		<section className={style["save"]}>
-			<h1>Edit</h1>
+		<section className={style["post"]}>
+			<h1>Edit post</h1>
 
-			<form className={style["save-form"]} onSubmit={handleEdit}>
+			<form className={style["post-form"]} onSubmit={handleEdit}>
 				<div className={style["input-container"]}>
 					<input
 						className="input"
@@ -98,14 +98,14 @@ editHandler
 					/>
 
 					<div className="buttons-container">
-						<button className="icon-button fa-solid fa-circle-check"
+						<button className="icon-button"
 							disabled={Object.values(errors).some(entry => entry !== "")
 								? true
 								: Object.values(inputs).some(entry => entry === "")}
-						>
+						>Save
 						</button>
 
-						<button className="icon-button fa-solid fa-circle-xmark"></button>
+						<button className="icon-button">Cancel</button>
 					</div>
 				</div>
 

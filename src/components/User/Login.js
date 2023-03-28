@@ -1,11 +1,16 @@
-import { useState } from "react"
+import { useState, useContext } from "react"
+import { useNavigate } from "react-router-dom"
 
 import style from "./User.module.css"
+import { UserContext } from "../../contexts/UserContext"
 import { login } from "../../services/userService"
 
 export const Login = ({
 
 }) => {
+	const navigate = useNavigate()
+	const { loginHandler } = useContext(UserContext)
+
 	const [inputs, setInputs] = useState({
 		email: "",
 		password: ""
@@ -13,7 +18,8 @@ export const Login = ({
 
 	const [errors, setErrors] = useState({
 		email: "",
-		password: ""
+		password: "",
+		server: ""
 	})
 
 	const handleInputChange = (event) => {
@@ -24,6 +30,7 @@ export const Login = ({
 			[name]: value
 		}))
 
+		setErrors({ server: "" })
 		validateInput(event)
 	}
 
@@ -51,14 +58,18 @@ export const Login = ({
 		})
 	}
 
-	const handleLoginSubmit = (event) => {
+	const handleLogin = (event) => {
 		event.preventDefault()
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		login(email, password)
-			.then(userData => {
-			console.log(userData)
+		login(email, password).then(result => {
+			if (!result.message) {
+				loginHandler(result)
+				navigate("/")
+			} else {
+				setErrors({ server: result.message + "." })
+			}
 		})
 	}
 
@@ -66,7 +77,7 @@ export const Login = ({
 		<section className="login">
 			<h1>Welcome!</h1>
 
-			<form className={style["user-form"]} onSubmit={handleLoginSubmit} >
+			<form className={style["user-form"]} onSubmit={handleLogin} >
 				<input
 					type="email"
 					name="email"
@@ -101,6 +112,7 @@ export const Login = ({
 
 			{errors.email && <p className="errors">{errors.email}</p>}
 			{errors.password && <p className="errors">{errors.password}</p>}
+			{errors.server && <p className="errors">{errors.server}</p>}
 		</section>
 	)
 }

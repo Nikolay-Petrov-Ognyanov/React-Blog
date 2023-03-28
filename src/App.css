@@ -41,36 +41,39 @@ h1 {
 
 .buttons-container {
 	display: flex;
-	gap: 5vw;
+	gap: 3.6vw;
 }
 
 .icon-button {
-	background-color: #01121F;
+	background-color: #3DA5FF;
 	border: none;
-	color: #3DA5FF;
 	padding: 0;
-	height: 5vw;
-	width: 5vw;
-	border-radius: 50%;
+	width: 10.4vw;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 5vw;
-	color: #3DA5FF;
+	height: 3.6vw;
+	font-size: 2vw;
+	text-align: center;
+	border-radius: 2vw;
+	border-style: none;
+	font-weight: bold;
 }
 
 .icon-button:hover {
 	cursor: pointer;
-	background-color: azure;
+	color: azure;
 	box-shadow: #3DA5FF 0 0 1vw 0.2vw;
+	text-shadow: 0 0 1vw azure;
 }
 
 .icon-button:disabled {
-	cursor: auto;
-	color: #446786;
-	box-shadow: none;
-	text-shadow: none;
 	pointer-events: none;
+	cursor: auto;
+	background-color: #446786;
+	box-shadow: none;
+	color: #01121F;
+	text-shadow: none;
 }
 
 .errors {

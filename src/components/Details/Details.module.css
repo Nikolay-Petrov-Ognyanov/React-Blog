@@ -35,6 +35,10 @@
 	padding: 1vw;
 }
 
+.details-title {
+	width: 100%;
+}
+
 .details-description {
 	width: 100%;
 }

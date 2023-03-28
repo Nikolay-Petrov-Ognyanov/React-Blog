@@ -1,7 +1,7 @@
 header {
 	position: fixed;
 	z-index: 1;
-	background-color: #01121F;
+	background-color: #001f3a;
 	width: 100%;
 	padding: 0.65vw 20vw;
 	border-bottom: #3DA5FF 0.25vw solid;
@@ -24,5 +24,6 @@ nav li {
 }
 
 .nav-list a:hover {
-	text-shadow: 0 0 2vw #3DA5FF;
+	color: azure;
+	text-shadow: 0 0 2vw azure;
 }

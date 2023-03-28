@@ -19,16 +19,22 @@ export const Details = ({
 			</div>
 			
 			<div className={style["details-text-container"]}>
-				<h2>{post.title}</h2>
+				<h2 className={style["details-title"]}>
+					{post.title}
+				</h2>
 
 				<p className={style["details-description"]} >
 					{post.description}
 				</p>
 
 				<div className="buttons-container">
-					<button className="icon-button fa-solid fa-pen-to-square"></button>
+					<button className="icon-button">
+						Like
+					</button>
 
-					<button className="icon-button fa-solid fa-trash-can"></button>
+					<button className="icon-button">
+						Dislike
+					</button>
 				</div>
 			</div>
 		</section>
