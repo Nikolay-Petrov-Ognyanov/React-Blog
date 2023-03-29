@@ -17,7 +17,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	top: 5.75vw;
+	top: 6.9vw;
 }
 
 h1 {
@@ -62,8 +62,8 @@ h1 {
 .button:hover {
 	cursor: pointer;
 	color: azure;
-	box-shadow: #3DA5FF 0 0 0.75vw 0.25vw;
-	text-shadow: 0 0 0.75vw azure;
+	box-shadow: #3DA5FF 0 0 1vw 0.25vw;
+	text-shadow: 0 0 1vw azure;
 }
 
 .button:disabled {

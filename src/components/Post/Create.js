@@ -3,6 +3,7 @@ import { useState, useContext } from "react"
 import style from "./Post.module.css"
 import { PostContext } from "../../contexts/PostContext"
 import * as postService from "../../services/postService"
+import { getRandomImageLink, imageLinks } from "./imageLinks"
 
 export const Create = () => {
     const { createHandler } = useContext(PostContext)
@@ -39,21 +40,20 @@ export const Create = () => {
             if (name === "title") {
                 if (!value) {
                     stateObject[name] = "Please enter a title."
-                } else if (value.length > 16) {
-                    stateObject[name] = "Title could be at most 16 characters long."
+                } else if (value && value.length > 15) {
+                    stateObject[name] = "Title could be at most 15 characters long."
                 }
             } else if (name === "imageUrl") {
-                if (!value) {
-                    stateObject[name] = "Please enter an image link."
-                } else if (/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
-                    .test(value) === false) {
+                if (value &&
+                    /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
+                        .test(value) === false) {
                     stateObject[name] = "Please enter a vaild image link."
                 }
             } else if (name === "description") {
                 if (!value) {
                     stateObject[name] = "Please enter a description."
-                } else if (value.length > 225) {
-                    stateObject[name] = "Description could be at most 225 characters long."
+                } else if (value.length > 207) {
+                    stateObject[name] = "Description could be at most 207 characters long."
                 }
             }
 
@@ -65,6 +65,15 @@ export const Create = () => {
         event.preventDefault()
 
         const postData = Object.fromEntries(new FormData(event.target))
+
+
+        if (postData.imageUrl === "") {
+            postData.imageUrl = getRandomImageLink()
+        } else if (imageLinks.includes(postData.imageUrl) === false) {
+            console.log(postData.imageUrl)
+        }
+
+        console.log(imageLinks.length)
 
         postService.create(postData).then(result => createHandler(result))
     }
@@ -101,7 +110,10 @@ export const Create = () => {
                         <button className="button"
                             disabled={Object.values(errors).some(entry => entry !== "")
                                 ? true
-                                : Object.values(inputs).some(entry => entry === "")}
+                                // : Object.values(inputs).some(entry => entry === "")}
+                                : Object.values(inputs)[0] === ""
+                                    ? true
+                                    : Object.values(inputs)[2] === ""}
                         >Save
                         </button>
 

@@ -23,7 +23,7 @@ function App() {
 
 	useEffect(() => {
 		postService.getAllPosts()
-			.then(result => setPosts(Object.values(result)))
+			.then(result => !result.code && setPosts(Object.values(result)))
 			.catch(error => console.log(error.message))
 	}, [])
 
@@ -41,7 +41,7 @@ function App() {
 			postData
 		])
 
-		navigate("/")
+		// navigate("/")
 	}
 
 	const editHandler = (postData) => {
