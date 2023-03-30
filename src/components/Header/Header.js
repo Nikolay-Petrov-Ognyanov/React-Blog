@@ -13,7 +13,7 @@ export const Header = () => {
 				<ul role="list" className={style["nav-list"]}>
 					<li><Link to="/" className="button">Home</Link></li>
 
-					{!user
+					{user === null
 						?
 						<>
 							<li><Link to="/register" className="button">Register</Link></li>

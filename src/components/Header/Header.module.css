@@ -3,7 +3,7 @@ header {
 	z-index: 1;
 	background-color: #001f3a;
 	width: 100%;
-	padding: 0.9vw 14.5vw;
+	padding: 1vw 14.5vw;
 	border-top: #3DA5FF 0.25vw solid;
 	border-bottom: #3DA5FF 0.25vw solid;
 }
@@ -19,5 +19,4 @@ nav li {
 
 .nav-list a {
 	color: #001f3a;
-	text-decoration: none;
 }

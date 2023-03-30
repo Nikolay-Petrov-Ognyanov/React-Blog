@@ -6,7 +6,7 @@ import * as postService from "../../services/postService"
 import { getRandomImageLink, imageLinks } from "./imageLinks"
 
 export const Create = () => {
-    const { createHandler } = useContext(PostContext)
+    const { createPostHandler } = useContext(PostContext)
 
     const [inputs, setInputs] = useState({
         title: "",
@@ -61,11 +61,10 @@ export const Create = () => {
         })
     }
 
-    const handleCreate = (event) => {
+    const handleCreatePost = (event) => {
         event.preventDefault()
 
         const postData = Object.fromEntries(new FormData(event.target))
-
 
         if (postData.imageUrl === "") {
             postData.imageUrl = getRandomImageLink()
@@ -73,16 +72,14 @@ export const Create = () => {
             console.log(postData.imageUrl)
         }
 
-        console.log(imageLinks.length)
-
-        postService.create(postData).then(result => createHandler(result))
+        postService.createPost(postData).then(result => createPostHandler(result))
     }
 
     return (
         <section className={style["post"]}>
             <h1>Create post</h1>
 
-            <form className={style["post-form"]} onSubmit={handleCreate}>
+            <form className={style["post-form"]} onSubmit={handleCreatePost}>
                 <div className={style["input-container"]}>
                     <input
                         className="input"

@@ -1,10 +1,25 @@
-import { useState, useContext } from "react"
+import { useState, useEffect, useContext } from "react"
+
+import * as postService from "../../services/postService"
 
 import style from "./Post.module.css"
 import { PostContext } from "../../contexts/PostContext"
+import { useNavigate, useParams } from "react-router-dom"
 
 export const Edit = () => {
-	const { editHandler } = useContext(PostContext)
+	const navigate = useNavigate()
+
+	const { editPostHandler } = useContext(PostContext)
+	const { postId } = useParams()
+
+	useEffect(() => {
+		postService.getOnePost(postId).then(postData => {
+			setPost(postData)
+			setInputs(postData)
+		})
+	}, [])
+
+	const [post, setPost] = useState({})
 
 	const [inputs, setInputs] = useState({
 		title: "",
@@ -60,21 +75,21 @@ export const Edit = () => {
 		})
 	}
 
-	const handleEdit = (event) => {
+	const handleEditPost = async (event) => {
 		event.preventDefault()
 
-		const postData = Object.fromEntries(new FormData(event.target))
+		const formData = Object.fromEntries(new FormData(event.target))
 
-		postData._id = postData.title
+		postService.editPost(postId, formData).catch(error => console.log(error.message))
 
-		editHandler(postData)
+		navigate(`/${postId}`)
 	}
 
 	return (
 		<section className={style["post"]}>
 			<h1>Edit post</h1>
 
-			<form className={style["post-form"]} onSubmit={handleEdit}>
+			<form className={style["post-form"]} onSubmit={handleEditPost}>
 				<div className={style["input-container"]}>
 					<input
 						className="input"

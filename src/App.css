@@ -17,7 +17,7 @@ main {
 	align-items: center;
 	justify-content: center;
 	position: relative;
-	top: 6.9vw;
+	top: 7.1vw;
 }
 
 h1 {
@@ -26,6 +26,11 @@ h1 {
 	color: #3DA5FF;
 	text-align: center;
 	margin-bottom: 1vw;
+}
+
+a {
+	color: #01121F;
+	text-decoration: none;
 }
 
 .input {

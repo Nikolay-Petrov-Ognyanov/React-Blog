@@ -26,6 +26,12 @@ function App() {
 			.then(result => !result.code && setPosts(Object.values(result)))
 			.catch(error => console.log(error.message))
 	}, [])
+	
+	// useEffect(() => {
+	// 	postService.getAllPosts().then(result => {
+	// 		!result.code && setPosts(Object.values(result))
+	// 	}).catch(error => console.log(error.message))
+	// }, [])
 
 	const loginHandler = (userData) => {
 		setUser(userData)
@@ -35,41 +41,31 @@ function App() {
 		setUser(null)
 	}
 
-	const createHandler = (postData) => {
+	const createPostHandler = (postData) => {
 		setPosts(state => [
 			...state,
 			postData
 		])
 
-		// navigate("/")
-	}
-
-	const editHandler = (postData) => {
-		setPosts(state => [
-			...state,
-			postData
-		])
-
-		navigate("/")
+		navigate(`${postData._id}`)
 	}
 
 	return (
 		<UserContext.Provider value={{
 			user,
 			loginHandler,
-			logoutHandler
+			logoutHandler,
 		}}>
 			<PostContext.Provider value={{
 				posts,
-				createHandler,
-				editHandler
+				createPostHandler,
 			}}>
 				<div className="App">
 					<Header />
 
 					<main>
 						<Routes>
-							<Route path="/" element={<Home posts={posts} />} />
+							<Route path="/" element={<Home />} />
 							<Route path="/register" element={<Register />} />
 							<Route path="/login" element={<Login />} />
 							<Route path="/logout" element={<Logout />} />

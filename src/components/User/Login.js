@@ -68,7 +68,7 @@ export const Login = () => {
 			} else {
 				setErrors({ server: result.message + "." })
 			}
-		})
+		}).catch(error => console.log(error.message))
 	}
 
 	return (

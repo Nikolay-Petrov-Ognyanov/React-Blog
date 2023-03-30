@@ -1,13 +1,16 @@
-import { useContext } from "react"
-import { useParams } from "react-router-dom"
-
+import { useState, useEffect, useContext } from "react"
+import { Link, useParams } from "react-router-dom"
+import * as postService from "../../services/postService"
 import style from "./Details.module.css"
 import { PostContext } from "../../contexts/PostContext"
 
 export const Details = () => {
-	const { posts } = useContext(PostContext)
 	const { postId } = useParams()
-	const post = posts.find(p => p._id === postId)
+	const [post, setPost] = useState({})
+
+	useEffect(() => {
+		postService.getOnePost(postId).then(postData => setPost(postData))
+	}, [])
 
 	return (
 		<section className={style["details"]}>
@@ -29,12 +32,12 @@ export const Details = () => {
 				</p>
 
 				<div className="buttons-container">
-					<button className="button">
-						Like
-					</button>
+					<Link to={`/${postId}/edit`} className="button">
+						Edit
+					</Link>
 
 					<button className="button">
-						Dislike
+						Delete
 					</button>
 				</div>
 			</div>
