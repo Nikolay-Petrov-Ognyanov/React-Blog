@@ -7,16 +7,16 @@ import { PostContext } from "../../contexts/PostContext"
 import { useNavigate, useParams } from "react-router-dom"
 
 export const Edit = () => {
-	const navigate = useNavigate()
-
 	const { editPostHandler } = useContext(PostContext)
 	const { postId } = useParams()
 
 	useEffect(() => {
-		postService.getOnePost(postId).then(postData => {
-			setPost(postData)
-			setInputs(postData)
-		})
+		postService.getOnePost(postId)
+			.then(postData => {
+				setPost(postData)
+				setInputs(postData)
+			})
+			.catch(error => console.log(error))
 	}, [])
 
 	const [post, setPost] = useState({})
@@ -80,9 +80,9 @@ export const Edit = () => {
 
 		const formData = Object.fromEntries(new FormData(event.target))
 
-		postService.editPost(postId, formData).catch(error => console.log(error.message))
-
-		navigate(`/${postId}`)
+		postService.editPost(postId, formData)
+			.then(postData => editPostHandler(postId, postData))
+			.catch(error => console.log(error))
 	}
 
 	return (

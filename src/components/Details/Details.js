@@ -2,14 +2,20 @@ import { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
 import * as postService from "../../services/postService"
 import style from "./Details.module.css"
-import { PostContext } from "../../contexts/PostContext"
+import { UserContext } from "../../contexts/UserContext"
 
 export const Details = () => {
+	const { user } = useContext(UserContext)
 	const { postId } = useParams()
 	const [post, setPost] = useState({})
 
+	const isUser = user && user._id !== post._ownerId
+	const isOwner = user && user._id === post._ownerId
+
 	useEffect(() => {
-		postService.getOnePost(postId).then(postData => setPost(postData))
+		postService.getOnePost(postId)
+			.then(postData => setPost(postData))
+			.catch(error => console.log(error))
 	}, [])
 
 	return (
@@ -31,15 +37,29 @@ export const Details = () => {
 					{post.description}
 				</p>
 
-				<div className="buttons-container">
-					<Link to={`/${postId}/edit`} className="button">
-						Edit
-					</Link>
+				{isUser &&
+					<div className="buttons-container">
+						<Link className="button">
+							Like
+						</Link>
 
-					<button className="button">
-						Delete
-					</button>
-				</div>
+						<Link className="button">
+							Dislike
+						</Link>
+					</div>
+				}
+
+				{isOwner &&
+					<div className="buttons-container">
+						<Link to={`/${postId}/edit`} className="button">
+							Edit
+						</Link>
+
+						<Link className="button">
+							Delete
+						</Link>
+					</div>
+				}
 			</div>
 		</section>
 	)

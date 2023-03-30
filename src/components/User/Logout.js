@@ -10,13 +10,15 @@ export const Logout = () => {
     const { user, logoutHandler } = useContext(UserContext)
 
     useEffect(() => {
-        userService.logout(user.accessToken).then(() => {
-            logoutHandler()
-            navigate("/")
-        }).catch((error) => {
-            console.log(error)
-            navigate("/")
-        })
+        userService.logout(user.accessToken)
+            .then(() => {
+                logoutHandler()
+                navigate("/")
+            })
+            .catch((error) => {
+                console.log(error)
+                navigate("/")
+            })
     })
 
     return null

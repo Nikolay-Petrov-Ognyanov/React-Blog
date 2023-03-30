@@ -9,7 +9,7 @@ export const Home = () => {
 
 	return (
 		<section className={style["home"]}>
-			{posts.length > 0 && posts.map(p => <Card key={p._id} post={p} />)}
+			{posts.length > 0 && posts.map(post => <Card key={post._id} post={post} />)}
 
 			{posts.length === 0 && <h1>No posts yet</h1>}
 		</section>

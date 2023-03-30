@@ -18,20 +18,15 @@ import { PostContext } from "./contexts/PostContext"
 
 function App() {
 	const navigate = useNavigate()
+	
 	const [posts, setPosts] = useState([])
 	const [user, setUser] = useLocalStorage("user", null)
 
 	useEffect(() => {
 		postService.getAllPosts()
 			.then(result => !result.code && setPosts(Object.values(result)))
-			.catch(error => console.log(error.message))
+			.catch(error => console.log(error))
 	}, [])
-	
-	// useEffect(() => {
-	// 	postService.getAllPosts().then(result => {
-	// 		!result.code && setPosts(Object.values(result))
-	// 	}).catch(error => console.log(error.message))
-	// }, [])
 
 	const loginHandler = (userData) => {
 		setUser(userData)
@@ -50,15 +45,22 @@ function App() {
 		navigate(`${postData._id}`)
 	}
 
+	const editPostHandler = (postId, postData) => {
+		setPosts(state => state.map(post => post._id === postId ? postData : post))
+
+		navigate(`${postData._id}`)
+	}
+
 	return (
 		<UserContext.Provider value={{
 			user,
 			loginHandler,
-			logoutHandler,
+			logoutHandler
 		}}>
 			<PostContext.Provider value={{
 				posts,
 				createPostHandler,
+				editPostHandler
 			}}>
 				<div className="App">
 					<Header />

@@ -61,14 +61,16 @@ export const Login = () => {
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		userService.login(email, password).then(result => {
-			if (!result.message) {
-				loginHandler(result)
-				navigate("/")
-			} else {
-				setErrors({ server: result.message + "." })
-			}
-		}).catch(error => console.log(error.message))
+		userService.login(email, password)
+			.then(result => {
+				if (!result.message) {
+					loginHandler(result)
+					navigate("/")
+				} else {
+					setErrors({ server: result.message + "." })
+				}
+			})
+			.catch(error => console.log(error.message))
 	}
 
 	return (

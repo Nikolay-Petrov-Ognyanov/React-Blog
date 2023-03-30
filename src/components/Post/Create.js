@@ -72,7 +72,9 @@ export const Create = () => {
             console.log(postData.imageUrl)
         }
 
-        postService.createPost(postData).then(result => createPostHandler(result))
+        postService.createPost(postData)
+            .then(result => createPostHandler(result))
+            .catch(error => console.log(error))
     }
 
     return (
