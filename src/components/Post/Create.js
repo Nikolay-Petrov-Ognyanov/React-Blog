@@ -1,8 +1,10 @@
 import { useState, useContext } from "react"
 
 import style from "./Post.module.css"
-import { PostContext } from "../../contexts/PostContext"
+
 import * as postService from "../../services/postService"
+
+import { PostContext } from "../../contexts/PostContext"
 import { getRandomImageLink, imageLinks } from "./imageLinks"
 
 export const Create = () => {

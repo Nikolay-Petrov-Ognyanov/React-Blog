@@ -1,6 +1,7 @@
 import { useContext } from "react"
 
 import style from "./Home.module.css"
+
 import { PostContext } from "../../contexts/PostContext"
 import { Card } from "../Card/Card"
 

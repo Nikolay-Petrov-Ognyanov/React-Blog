@@ -1,7 +1,10 @@
 import { useState, useEffect, useContext } from "react"
 import { Link, useParams } from "react-router-dom"
+
 import * as postService from "../../services/postService"
+
 import style from "./Details.module.css"
+
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 
@@ -21,7 +24,7 @@ export const Details = () => {
 	}, [])
 
 	const handleDeletePost = (post) => {
-		if (window.confirm(`Are you sure you want to delete ${post.title}?`)) {
+		if (window.confirm(`Are you sure you want to delete "${post.title}"?`)) {
 			postService.deletePost(post._id)
 
 			deletePostHandler(post._id)

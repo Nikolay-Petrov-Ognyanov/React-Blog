@@ -2,8 +2,10 @@ import { useState, useContext } from "react"
 import { useNavigate } from "react-router-dom"
 
 import style from "./User.module.css"
-import { UserContext } from "../../contexts/UserContext"
+
 import * as userService from "../../services/userService"
+
+import { UserContext } from "../../contexts/UserContext"
 
 export const Login = () => {
 	const navigate = useNavigate()

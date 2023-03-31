@@ -3,8 +3,9 @@ import { useState, useEffect, useContext } from "react"
 import * as postService from "../../services/postService"
 
 import style from "./Post.module.css"
+
 import { PostContext } from "../../contexts/PostContext"
-import { useNavigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 
 export const Edit = () => {
 	const { editPostHandler } = useContext(PostContext)
