@@ -1,11 +1,11 @@
-import { useState, useEffect, useContext } from "react"
+import { useState, useEffect } from "react"
 import { Link, useParams } from "react-router-dom"
 import * as postService from "../../services/postService"
 import style from "./Details.module.css"
-import { UserContext } from "../../contexts/UserContext"
+import { useUserContext } from "../../contexts/UserContext"
 
 export const Details = () => {
-	const { user } = useContext(UserContext)
+	const { user } = useUserContext()
 	const { postId } = useParams()
 	const [post, setPost] = useState({})
 
@@ -51,7 +51,8 @@ export const Details = () => {
 
 				{isOwner &&
 					<div className="buttons-container">
-						<Link to={`/${postId}/edit`} className="button">
+						<Link to={`/${postId}/edit`}
+							className="button">
 							Edit
 						</Link>
 

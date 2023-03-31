@@ -12,29 +12,19 @@ import { Logout } from "./components/User/Logout";
 import { Create } from "./components/Post/Create";
 import { Edit } from "./components/Post/Edit";
 import { Details } from "./components/Details/Details";
-import { useLocalStorage } from "./hooks/useLocalStorage";
-import { UserContext } from "./contexts/UserContext";
+import { UserProvider } from "./contexts/UserContext";
 import { PostContext } from "./contexts/PostContext"
 
 function App() {
 	const navigate = useNavigate()
-	
+
 	const [posts, setPosts] = useState([])
-	const [user, setUser] = useLocalStorage("user", null)
 
 	useEffect(() => {
 		postService.getAllPosts()
 			.then(result => !result.code && setPosts(Object.values(result)))
 			.catch(error => console.log(error))
 	}, [])
-
-	const loginHandler = (userData) => {
-		setUser(userData)
-	}
-
-	const logoutHandler = () => {
-		setUser(null)
-	}
 
 	const createPostHandler = (postData) => {
 		setPosts(state => [
@@ -52,11 +42,7 @@ function App() {
 	}
 
 	return (
-		<UserContext.Provider value={{
-			user,
-			loginHandler,
-			logoutHandler
-		}}>
+		<UserProvider >
 			<PostContext.Provider value={{
 				posts,
 				createPostHandler,
@@ -78,7 +64,7 @@ function App() {
 					</main>
 				</div>
 			</PostContext.Provider>
-		</UserContext.Provider>
+		</UserProvider>
 	);
 }
 
