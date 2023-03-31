@@ -2,10 +2,10 @@ import { useContext } from "react"
 import { Link } from "react-router-dom"
 
 import style from "./Header.module.css"
-import { useUserContext } from "../../contexts/UserContext"
+import { UserContext } from "../../contexts/UserContext"
 
 export const Header = () => {
-	const { user } = useUserContext()
+	const { user } = useContext(UserContext)
 
 	return (
 		<header>

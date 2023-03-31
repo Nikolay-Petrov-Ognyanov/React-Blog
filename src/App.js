@@ -41,12 +41,19 @@ function App() {
 		navigate(`${postData._id}`)
 	}
 
+	const deletePostHandler = (postId) => {
+		setPosts(state => state.filter(post => post._id !== postId))
+
+		navigate("/")
+	}
+
 	return (
 		<UserProvider >
 			<PostContext.Provider value={{
 				posts,
 				createPostHandler,
-				editPostHandler
+				editPostHandler,
+				deletePostHandler
 			}}>
 				<div className="App">
 					<Header />

@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext} from "react";
 
 import { useLocalStorage } from "../hooks/useLocalStorage";
 
@@ -28,10 +28,4 @@ export const UserProvider = ({
             {children}
         </UserContext.Provider>
     )
-}
-
-export const useUserContext = () => {
-    const context = useContext(UserContext)
-
-    return context
 }
