@@ -17,10 +17,7 @@ export const PostProvider = ({ children }) => {
     }, [])
 
     const createPostHandler = (postData) => {
-        setPosts(state => [
-            ...state,
-            postData
-        ])
+        setPosts(state => [...state, postData])
 
         navigate(`${postData._id}`)
     }
