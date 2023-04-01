@@ -11,9 +11,9 @@ export const LikeProvider = ({ children }) => {
     const [likes, setLikes] = useState([])
 
     useEffect(() => {
-        likeService.getAllLikes()
-            .then(result => result && !result.code && setLikes(Object.values(result)))
-            .catch(error => console.log(error))
+        likeService.getAllLikes().then(result => {
+            result && !result.code && setLikes(Object.values(result))
+        }).catch(error => console.log(error))
     }, [])
 
     const createLikeHandler = (entry) => {

@@ -11,61 +11,52 @@ import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
 
 export const Details = () => {
+	const { postId } = useParams()
+
 	const { user } = useContext(UserContext)
 	const { deletePostHandler } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
-	const { postId } = useParams()
+
 	const [post, setPost] = useState({})
 
 	const isUser = user && user._id !== post._ownerId
 	const isOwner = user && user._id === post._ownerId
 
-	let like = null
+	let currentReaction = null
+	let likesCount = null
+	let dislikesCount = null
 
 	if (likes && likes.find(entry => entry.postId === postId)) {
-		like = likes.find(entry => entry.postId === postId).like
+		likesCount = likes.filter(entry => entry.postId === postId && entry.like === true).length
+		dislikesCount = likes.filter(entry => entry.postId === postId && entry.like === false).length
+	}
+
+	if (likes && likes.find(entry => entry.postId === postId && entry._ownerId === user._id)) {
+		currentReaction = likes.find(entry => entry.postId === postId && entry._ownerId === user._id).like
 	}
 
 	useEffect(() => {
-		postService.getOnePost(postId)
-			.then(postData => setPost(postData))
-			.catch(error => console.log(error))
+		postService.getOnePost(postId).then(postData => {
+			setPost(postData)
+		}).catch(error => console.log(error))
 	}, [])
 
-	const handleLikePost = (postId, user) => {
-		like = true
+	const handleLikePost = (postId, user, newReaction) => {
+		currentReaction = newReaction
 
 		likeService.getAllLikes().then(result => {
 			const entry = result.find(e => e.postId === postId && e._ownerId === user._id)
 
 			if (entry === undefined) {
-				likeService.createLikeEntry(postId, like)
-					.then(entry => createLikeHandler(entry))
-					.catch(error => console.log(error))
-			} else if (entry.like === false) {
-				likeService.updateLikeEntry(entry._id, postId, like)
+				likeService.createLikeEntry(postId, currentReaction).then(entry => {
+					createLikeHandler(entry)
+				}).catch(error => console.log(error))
+			} else if (entry.like !== currentReaction) {
+				likeService.updateLikeEntry(entry._id, postId, currentReaction)
 
-				updateLikeHandler(entry._id, { ...entry, like: true })
+				updateLikeHandler(entry._id, { ...entry, like: currentReaction })
 			}
 		}).catch(error => console.log(error))
-	}
-
-	const handleDisikePost = (postId, user) => {
-		like = false
-
-		likeService.getAllLikes().then(result => {
-			const entry = result.find(e => e.postId === postId && e._ownerId === user._id)
-
-			if (entry === undefined) {
-				likeService.createLikeEntry(postId, like)
-					.then(entry => createLikeHandler(entry))
-					.catch(error => console.log(error))
-			} else if (entry.like === true) {
-				likeService.updateLikeEntry(entry._id, postId, like)
-
-				updateLikeHandler(entry._id, { ...entry, like: false })
-			}
-		})
 	}
 
 	const handleDeletePost = (post) => {
@@ -95,20 +86,36 @@ export const Details = () => {
 					{post.description}
 				</p>
 
+				<p>
+					{likesCount
+						? dislikesCount
+							? `${`${likesCount === 1
+								? `${likesCount} like`
+								: `${likesCount} likes`} & ${dislikesCount === 1
+									? `${dislikesCount} dislike`
+									: `${dislikesCount} dislikes`}`}`
+							: `${likesCount === 1
+								? `${likesCount} like`
+								: `${likesCount} likes`}`
+						: `${dislikesCount === 1
+							? `${dislikesCount} dislike`
+							: `${dislikesCount} dislikes`}`}
+				</p>
+
 				{isUser &&
 					<div className="buttons-container">
 						<button
-							onClick={() => handleLikePost(postId, user)}
+							onClick={() => handleLikePost(postId, user, true)}
 							className="button"
-							disabled={like === true}
+							disabled={currentReaction === true}
 						>
 							Like
 						</button>
 
 						<button
-							onClick={() => handleDisikePost(postId, user)}
+							onClick={() => handleLikePost(postId, user, false)}
 							className="button"
-							disabled={like === false}
+							disabled={currentReaction === false}
 						>
 							Dislike
 						</button>

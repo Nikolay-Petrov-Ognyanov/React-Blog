@@ -11,9 +11,9 @@ export const PostProvider = ({ children }) => {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
-        postService.getAllPosts()
-            .then(result => !result.code && setPosts(Object.values(result)))
-            .catch(error => console.log(error))
+        postService.getAllPosts().then(result => {
+            !result.code && setPosts(Object.values(result))
+        }).catch(error => console.log(error))
     }, [])
 
     const createPostHandler = (postData) => {

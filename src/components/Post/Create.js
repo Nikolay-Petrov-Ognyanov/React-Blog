@@ -74,9 +74,9 @@ export const Create = () => {
             console.log(postData.imageUrl)
         }
 
-        postService.createPost(postData)
-            .then(result => createPostHandler(result))
-            .catch(error => console.log(error))
+        postService.createPost(postData).then(result => {
+            createPostHandler(result)
+        }).catch(error => console.log(error))
     }
 
     return (

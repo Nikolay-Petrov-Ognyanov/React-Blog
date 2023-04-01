@@ -77,16 +77,14 @@ export const Register = () => {
 
 		const { email, password } = Object.fromEntries(new FormData(event.target))
 
-		userService.register(email, password)
-			.then(result => {
-				if (!result.message) {
-					loginHandler(result)
-					navigate("/")
-				} else {
-					setErrors({ server: result.message + "." })
-				}
-			})
-			.catch(error => console.log(error))
+		userService.register(email, password).then(result => {
+			if (!result.message) {
+				loginHandler(result)
+				navigate("/")
+			} else {
+				setErrors({ server: result.message + "." })
+			}
+		}).catch(error => console.log(error))
 	}
 
 	return (

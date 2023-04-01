@@ -12,12 +12,10 @@ export const Edit = () => {
 	const { postId } = useParams()
 
 	useEffect(() => {
-		postService.getOnePost(postId)
-			.then(postData => {
-				setPost(postData)
-				setInputs(postData)
-			})
-			.catch(error => console.log(error))
+		postService.getOnePost(postId).then(postData => {
+			setPost(postData)
+			setInputs(postData)
+		}).catch(error => console.log(error))
 	}, [])
 
 	const [post, setPost] = useState({})
@@ -81,9 +79,9 @@ export const Edit = () => {
 
 		const formData = Object.fromEntries(new FormData(event.target))
 
-		postService.editPost(postId, formData)
-			.then(postData => editPostHandler(postId, postData))
-			.catch(error => console.log(error))
+		postService.editPost(postId, formData).then(postData => {
+			editPostHandler(postId, postData)
+		}).catch(error => console.log(error))
 	}
 
 	return (
