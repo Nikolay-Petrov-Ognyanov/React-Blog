@@ -8,8 +8,8 @@
 }
 
 .details-img-container {
-	height: 38.6vw;
-	width: 38.6vw;
+	height: 38.4vw;
+	width: 38.4vw;
 	border-radius: 2vw;
 	overflow: hidden;
 }
@@ -21,8 +21,8 @@
 }
 
 .details-text-container {
-	height: 38.6vw;
-	width: 38.6vw;
+	height: 38.4vw;
+	width: 38.4vw;
 	border: 0.25vw solid #3DA5FF;
 	border-radius: 2vw;
 	word-wrap: break-word;
@@ -41,4 +41,10 @@
 
 .details-description {
 	width: 100%;
+}
+
+.details-likes-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 1vw;
 }

@@ -19,3 +19,18 @@ export const logout = async (accessToken) => {
         console.log(error)
     }
 }
+
+export const getAllUsers = () => {
+    return fetch(`http://localhost:3030/jsonstore/users`).then(response => response.json())
+}
+
+
+export const createUser = (userData) => {
+    userData.userId = userData._id
+
+    return fetch(`http://localhost:3030/jsonstore/users`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(userData)
+    })
+}

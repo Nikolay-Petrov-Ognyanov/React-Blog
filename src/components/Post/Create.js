@@ -54,8 +54,8 @@ export const Create = () => {
             } else if (name === "description") {
                 if (!value) {
                     stateObject[name] = "Please enter a description."
-                } else if (value.length > 207) {
-                    stateObject[name] = "Description could be at most 207 characters long."
+                } else if (value.length > 138) {
+                    stateObject[name] = "Description could be at most 138 characters long."
                 }
             }
 
@@ -111,7 +111,6 @@ export const Create = () => {
                         <button className="button"
                             disabled={Object.values(errors).some(entry => entry !== "")
                                 ? true
-                                // : Object.values(inputs).some(entry => entry === "")}
                                 : Object.values(inputs)[0] === ""
                                     ? true
                                     : Object.values(inputs)[2] === ""}

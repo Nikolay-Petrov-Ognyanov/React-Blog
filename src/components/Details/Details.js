@@ -13,14 +13,21 @@ import { LikeContext } from "../../contexts/LikeContext"
 export const Details = () => {
 	const { postId } = useParams()
 
-	const { user } = useContext(UserContext)
+	const { user, users } = useContext(UserContext)
 	const { deletePostHandler } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
 
 	const [post, setPost] = useState({})
 
+	useEffect(() => {
+		postService.getOnePost(postId).then(postData => {
+			setPost(postData)
+		}).catch(error => console.log(error))
+	}, [])
+
+	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
-	const isOwner = user && user._id === post._ownerId
+	const isAuthor = user && user._id === post._ownerId
 
 	let currentReaction = null
 	let likesCount = null
@@ -34,12 +41,6 @@ export const Details = () => {
 	if (likes && likes.find(entry => entry.postId === postId && entry._ownerId === user._id)) {
 		currentReaction = likes.find(entry => entry.postId === postId && entry._ownerId === user._id).like
 	}
-
-	useEffect(() => {
-		postService.getOnePost(postId).then(postData => {
-			setPost(postData)
-		}).catch(error => console.log(error))
-	}, [])
 
 	const handleLikePost = (postId, user, newReaction) => {
 		currentReaction = newReaction
@@ -67,6 +68,15 @@ export const Details = () => {
 		}
 	}
 
+	let oneLikeNoDislikes = likesCount === 1 && !dislikesCount
+	let noLikesOneDislike = !likesCount && dislikesCount === 1
+	let oneLikeOneDislike = likesCount === 1 && dislikesCount === 1
+	let multipleLikesNoDislikes = likesCount > 1 && !dislikesCount
+	let noLikesMultipleDislikes = !likesCount && dislikesCount > 0
+	let multipleLikesOneDislike = likesCount > 1 && dislikesCount === 1
+	let oneLikeMultipleDislikes = likesCount === 1 && dislikesCount > 1
+	let multipleLikesMultipleDislikes = likesCount > 1 && dislikesCount > 1
+
 	return (
 		<section className={style["details"]}>
 			<div className={style["details-img-container"]}>
@@ -78,65 +88,76 @@ export const Details = () => {
 			</div>
 
 			<div className={style["details-text-container"]}>
-				<h2 className={style["details-title"]}>
-					{post.title}
-				</h2>
+				<div>
+					<h2 className={style["details-title"]}>
+						{post.title}
+					</h2>
+
+					<p>
+						By {postAuthor &&
+							postAuthor.email.slice(0, 1).toUpperCase() +
+							postAuthor.email.split("@")[0].slice(1)
+						}
+					</p>
+				</div>
 
 				<p className={style["details-description"]} >
 					{post.description}
 				</p>
 
-				<p>
-					{likesCount
-						? dislikesCount
-							? `${`${likesCount === 1
-								? `${likesCount} like`
-								: `${likesCount} likes`} & ${dislikesCount === 1
-									? `${dislikesCount} dislike`
-									: `${dislikesCount} dislikes`}`}`
-							: `${likesCount === 1
-								? `${likesCount} like`
-								: `${likesCount} likes`}`
-						: `${dislikesCount === 1
-							? `${dislikesCount} dislike`
-							: `${dislikesCount} dislikes`}`}
-				</p>
+				<div className={style["details-likes-wrapper"]}>
+					<p className={style["likes-container"]} >
+						{
+							oneLikeNoDislikes && `${likesCount} like` ||
+							noLikesOneDislike && `${dislikesCount} dislike` ||
+							oneLikeOneDislike && `${likesCount} like & ${dislikesCount} dislike` ||
+							multipleLikesNoDislikes && `${likesCount} likes` ||
+							noLikesMultipleDislikes && `${dislikesCount} dislikes` ||
+							multipleLikesOneDislike && `${likesCount} likes & ${dislikesCount} dislike` ||
+							oneLikeMultipleDislikes && `${likesCount} like & ${dislikesCount} dislikes` ||
+							multipleLikesMultipleDislikes && `${likesCount} likes & ${dislikesCount} dislikes`
+						}
+					</p>
 
-				{isUser &&
-					<div className="buttons-container">
-						<button
-							onClick={() => handleLikePost(postId, user, true)}
-							className="button"
-							disabled={currentReaction === true}
-						>
-							Like
-						</button>
+					{isUser &&
+						<div className="buttons-container">
 
-						<button
-							onClick={() => handleLikePost(postId, user, false)}
-							className="button"
-							disabled={currentReaction === false}
-						>
-							Dislike
-						</button>
-					</div>
-				}
+							<button
+								onClick={() => handleLikePost(postId, user, true)}
+								className="button"
+								disabled={currentReaction === true}
+							>
+								Like
+							</button>
 
-				{isOwner &&
-					<div className="buttons-container">
-						<Link to={`/${postId}/edit`}
-							className="button"
-						>
-							Edit
-						</Link>
+							<button
+								onClick={() => handleLikePost(postId, user, false)}
+								className="button"
+								disabled={currentReaction === false}
+							>
+								Dislike
+							</button>
+						</div>
+					}
 
-						<button onClick={() => handleDeletePost(post, user)}
-							className="button"
-						>
-							Delete
-						</button>
-					</div>
-				}
+					{isAuthor &&
+
+						<div className="buttons-container">
+
+							<Link to={`/${postId}/edit`}
+								className="button"
+							>
+								Edit
+							</Link>
+
+							<button onClick={() => handleDeletePost(post, user)}
+								className="button"
+							>
+								Delete
+							</button>
+						</div>
+					}
+				</div>
 			</div>
 		</section>
 	)
