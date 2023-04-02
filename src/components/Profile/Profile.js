@@ -25,23 +25,25 @@ export const Profile = () => {
         <section className={style["profile"]}>
             <h1>{selectedUser?.email}</h1>
 
-            <div className={style["profile-wrapper"]}>
-                <div className={style["posts-wrapper"]}>
-                    <h2>Posts:</h2>
+            {userPosts.length > 0 && userLikes.length > 0 &&
+                <div className={style["profile-wrapper"]}>
+                    <div className={style["posts-wrapper"]}>
+                        <h2>Posts</h2>
 
-                    <div className={style["posts-container"]}>
-                        {userPosts.length > 0 && userPosts.map(post => post && <Card key={post._id} post={post} />)}
+                        <div className={style["posts-container"]}>
+                            {userPosts.map(post => post && <Card key={post._id} post={post} />)}
+                        </div>
+                    </div>
+
+                    <div className={style["likes-wrapper"]}>
+                        <h2>Likes</h2>
+
+                        <div className={style["likes-container"]}>
+                            {userLikes.map(post => post && <Card key={post._id} post={post} />)}
+                        </div>
                     </div>
                 </div>
-
-                <div className={style["likes-wrapper"]}>
-                    <h2>Likes:</h2>
-
-                    <div className={style["likes-container"]}>
-                        {userLikes.length > 0 && userLikes.map(post => post && <Card key={post._id} post={post} />)}
-                    </div>
-                </div>
-            </div>
+            }
         </section>
     )
 }

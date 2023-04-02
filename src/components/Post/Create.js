@@ -42,8 +42,8 @@ export const Create = () => {
             if (name === "title") {
                 if (!value) {
                     stateObject[name] = "Please enter a title."
-                } else if (value && value.length > 15) {
-                    stateObject[name] = "Title could be at most 15 characters long."
+                } else if (value && value.length > 12) {
+                    stateObject[name] = "Title could be at most 12 characters long."
                 }
             } else if (name === "imageUrl") {
                 if (value &&
@@ -54,8 +54,8 @@ export const Create = () => {
             } else if (name === "description") {
                 if (!value) {
                     stateObject[name] = "Please enter a description."
-                } else if (value.length > 138) {
-                    stateObject[name] = "Description could be at most 138 characters long."
+                } else if (value.length > 120) {
+                    stateObject[name] = "Description could be at most 120 characters long."
                 }
             }
 

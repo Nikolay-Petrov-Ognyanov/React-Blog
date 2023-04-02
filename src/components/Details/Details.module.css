@@ -1,10 +1,10 @@
-a {
+.author {
 	color: #3DA5FF;
 	text-shadow: 0 0 1vw #3DA5FF;
 	font-weight: 500;
 }
 
-a:hover {
+.author:hover {
 	color: azure;
 	text-shadow: 0 0 2vw azure;
 	font-weight: 700;
@@ -47,8 +47,13 @@ a:hover {
 	padding: 1vw;
 }
 
+.title-wrapper {
+	width: 100%;
+}
+
 .details-title {
 	width: 100%;
+	margin: 0;
 }
 
 .details-description {
@@ -58,5 +63,7 @@ a:hover {
 .details-likes-wrapper {
 	display: flex;
 	flex-direction: column;
+	justify-content: space-between;
 	gap: 1vw;
+	height: 7.6vw;
 }

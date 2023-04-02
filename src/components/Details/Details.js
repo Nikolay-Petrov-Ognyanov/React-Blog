@@ -88,10 +88,13 @@ export const Details = () => {
 			</div>
 
 			<div className={style["details-text-container"]}>
-				<div>
+				<div className={style["title-wrapper"]}>
 					<h2 className={style["details-title"]}>{post.title}</h2>
 
-					<Link to={post && `/profile/${post._ownerId}`}>
+					<Link
+						to={post && `/profile/${post._ownerId}`}
+						className={style["author"]}
+					>
 						by {postAuthor?.email}
 					</Link>
 				</div>
