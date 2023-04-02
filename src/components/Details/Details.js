@@ -72,7 +72,7 @@ export const Details = () => {
 	let noLikesOneDislike = !likesCount && dislikesCount === 1
 	let oneLikeOneDislike = likesCount === 1 && dislikesCount === 1
 	let multipleLikesNoDislikes = likesCount > 1 && !dislikesCount
-	let noLikesMultipleDislikes = !likesCount && dislikesCount > 0
+	let noLikesMultipleDislikes = !likesCount && dislikesCount > 1
 	let multipleLikesOneDislike = likesCount > 1 && dislikesCount === 1
 	let oneLikeMultipleDislikes = likesCount === 1 && dislikesCount > 1
 	let multipleLikesMultipleDislikes = likesCount > 1 && dislikesCount > 1
@@ -89,16 +89,11 @@ export const Details = () => {
 
 			<div className={style["details-text-container"]}>
 				<div>
-					<h2 className={style["details-title"]}>
-						{post.title}
-					</h2>
+					<h2 className={style["details-title"]}>{post.title}</h2>
 
-					<p>
-						By {postAuthor &&
-							postAuthor.email.slice(0, 1).toUpperCase() +
-							postAuthor.email.split("@")[0].slice(1)
-						}
-					</p>
+					<Link to={post && `/profile/${post._ownerId}`}>
+						by {postAuthor?.email}
+					</Link>
 				</div>
 
 				<p className={style["details-description"]} >
@@ -141,16 +136,17 @@ export const Details = () => {
 					}
 
 					{isAuthor &&
-
 						<div className="buttons-container">
 
-							<Link to={`/${postId}/edit`}
+							<Link
+								to={`/${postId}/edit`}
 								className="button"
 							>
 								Edit
 							</Link>
 
-							<button onClick={() => handleDeletePost(post, user)}
+							<button
+								onClick={() => handleDeletePost(post, user)}
 								className="button"
 							>
 								Delete

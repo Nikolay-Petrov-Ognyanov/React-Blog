@@ -1,0 +1,26 @@
+h2 {
+    text-align: center;
+}
+
+.profile {
+    width: 100%;
+}
+
+.profile-wrapper {
+    display: flex;
+    justify-content: space-evenly
+}
+
+.posts-wrapper,
+.likes-wrapper {
+    width: 38.6vw;
+}
+
+.posts-container,
+.likes-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+}
