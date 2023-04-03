@@ -42,6 +42,8 @@ export const Create = () => {
             if (name === "title") {
                 if (!value) {
                     stateObject[name] = "Please enter a title."
+                } else if (value && /^[a-zA-Z0-9]*$/.test(value) === false) {
+                    stateObject[name] = "Please enter a valid title."
                 } else if (value && value.length > 12) {
                     stateObject[name] = "Title could be at most 12 characters long."
                 }
@@ -101,7 +103,7 @@ export const Create = () => {
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
-                        placeholder="Enter image link"
+                        placeholder="Enter image link (optional)"
                         value={inputs.imageUrl}
                         onChange={handleInputChange}
                         onBlur={validateInput}

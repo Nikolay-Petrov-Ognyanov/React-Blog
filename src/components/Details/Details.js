@@ -14,7 +14,7 @@ export const Details = () => {
 	const { postId } = useParams()
 
 	const { user, users } = useContext(UserContext)
-	const { deletePostHandler } = useContext(PostContext)
+	const { deletePostHandler, posts } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
 
 	const [post, setPost] = useState({})
@@ -24,6 +24,12 @@ export const Details = () => {
 			setPost(postData)
 		}).catch(error => console.log(error))
 	}, [])
+
+
+	const postIdList = posts.map(p => p._id)
+	const currentIndex = postIdList.indexOf(postId)
+	const previousIndex = currentIndex >= 1 && currentIndex - 1
+	const nextIndex = currentIndex <= postIdList.length - 2 && currentIndex + 1
 
 	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
