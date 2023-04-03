@@ -23,7 +23,7 @@ export const logout = async (accessToken) => {
 export const getAllUsers = async () => {
     const response = await fetch(`http://localhost:3030/jsonstore/users`)
 
-    return response.ok && response.json()
+    return response.ok && await response.json()
 }
 
 

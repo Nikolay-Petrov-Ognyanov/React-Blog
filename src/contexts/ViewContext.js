@@ -1,7 +1,5 @@
 import { useState, useEffect, createContext } from "react";
 
-import * as viewService from "../services/viewService"
-
 export const ViewContext = createContext()
 
 export const ViewProvider = ({ children }) => {
@@ -9,10 +7,8 @@ export const ViewProvider = ({ children }) => {
     const [selectedUserId, setSelectedUserId] = useState(null)
 
     useEffect(() => {
-        viewService.getViewInfo().then(result => {
-            setSelectedView(result[result.length - 1].view)
-            setSelectedUserId(result[result.length - 1]._id)
-        }).catch(error => console.log(error))
+        setSelectedView(localStorage.getItem("view") || "")
+        setSelectedUserId(localStorage.getItem("userId") || null)
     }, [])
 
     const selectView = (currentView) => {

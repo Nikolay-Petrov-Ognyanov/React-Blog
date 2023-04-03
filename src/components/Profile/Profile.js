@@ -6,8 +6,6 @@ import style from "./Profile.module.css"
 import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
 
-import * as viewService from "../../services/viewService"
-
 import { Card } from "../Card/Card"
 import { UserContext } from "../../contexts/UserContext"
 import { ViewContext } from "../../contexts/ViewContext"
@@ -20,17 +18,11 @@ export const Profile = () => {
     const { selectView, selectUserId } = useContext(ViewContext)
 
     useEffect(() => {
-        const view = "profile"
-
-        selectView(view)
-
+        selectView("profile")
         selectUserId(userId)
 
-        viewService.createViewEntry(view, userId)
-
-        viewService.getViewInfo().then(result => {
-            console.log(result[result.length - 1])
-        }).catch(error => console.log(error))
+        localStorage.setItem("view", "profile")
+        localStorage.setItem("userId", userId)
     }, [])
 
     const selectedUser = users.find(u => u.userId === userId)

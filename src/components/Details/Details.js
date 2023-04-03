@@ -3,7 +3,6 @@ import { Link, useParams } from "react-router-dom"
 
 import * as likeService from "../../services/likeService"
 import * as postService from "../../services/postService"
-import * as viewService from "../../services/viewService"
 
 import style from "./Details.module.css"
 
@@ -25,10 +24,6 @@ export const Details = () => {
 	useEffect(() => {
 		postService.getOnePost(postId).then(postData => {
 			setPost(postData)
-		}).catch(error => console.log(error))
-
-		viewService.getViewInfo().then(result => {
-			result && console.log(result[result.length - 1])
 		}).catch(error => console.log(error))
 	}, [])
 
