@@ -24,6 +24,7 @@ const request = async (method, url, data) => {
         }
 
         const response = await requester
+
         const result = await response.json()
 
         return result

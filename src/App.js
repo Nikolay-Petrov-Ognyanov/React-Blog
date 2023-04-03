@@ -1,6 +1,7 @@
-import { Routes, Route} from "react-router-dom"
+import { Routes, Route } from "react-router-dom"
 
 import './App.css';
+
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
 import { Register } from "./components/User/Register";
@@ -13,28 +14,31 @@ import { UserProvider } from "./contexts/UserContext";
 import { PostProvider } from "./contexts/PostContext"
 import { LikeProvider } from "./contexts/LikeContext"
 import { Profile } from "./components/Profile/Profile";
+import { ViewProvider } from "./contexts/ViewContext";
 
 function App() {
 	return (
 		<UserProvider >
 			<PostProvider>
 				<LikeProvider>
-					<div className="App">
-						<Header />
+					<ViewProvider>
+						<div className="App">
+							<Header />
 
-						<main>
-							<Routes>
-								<Route path="/" element={<Home />} />
-								<Route path="/register" element={<Register />} />
-								<Route path="/login" element={<Login />} />
-								<Route path="/logout" element={<Logout />} />
-								<Route path="/create" element={<Create />} />
-								<Route path="profile/:userId" element={<Profile />} />
-								<Route path="/:postId" element={<Details />} />
-								<Route path="/:postId/edit" element={<Edit />} />
-							</Routes>
-						</main>
-					</div>
+							<main>
+								<Routes>
+									<Route path="/" element={<Home />} />
+									<Route path="/register" element={<Register />} />
+									<Route path="/login" element={<Login />} />
+									<Route path="/logout" element={<Logout />} />
+									<Route path="/create" element={<Create />} />
+									<Route path="profile/:userId" element={<Profile />} />
+									<Route path="/:postId" element={<Details />} />
+									<Route path="/:postId/edit" element={<Edit />} />
+								</Routes>
+							</main>
+						</div>
+					</ViewProvider>
 				</LikeProvider>
 			</PostProvider>
 		</UserProvider>

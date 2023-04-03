@@ -3,12 +3,14 @@ import { Link, useParams } from "react-router-dom"
 
 import * as likeService from "../../services/likeService"
 import * as postService from "../../services/postService"
+import * as viewService from "../../services/viewService"
 
 import style from "./Details.module.css"
 
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
+import { ViewContext } from "../../contexts/ViewContext"
 
 export const Details = () => {
 	const { postId } = useParams()
@@ -16,6 +18,7 @@ export const Details = () => {
 	const { user, users } = useContext(UserContext)
 	const { deletePostHandler, posts } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
+	const { selectedUserId, selectedView } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
 
@@ -23,8 +26,11 @@ export const Details = () => {
 		postService.getOnePost(postId).then(postData => {
 			setPost(postData)
 		}).catch(error => console.log(error))
-	}, [])
 
+		viewService.getViewInfo().then(result => {
+			result && console.log(result[result.length - 1])
+		}).catch(error => console.log(error))
+	}, [])
 
 	const postIdList = posts.map(p => p._id)
 	const currentIndex = postIdList.indexOf(postId)

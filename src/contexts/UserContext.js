@@ -6,15 +6,13 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 export const UserContext = createContext()
 
-export const UserProvider = ({
-    children,
-}) => {
+export const UserProvider = ({ children }) => {
     const [user, setUser] = useLocalStorage("user", null)
     const [users, setUsers] = useState([])
 
     useEffect(() => {
-        userService.getAllUsers().then(result => {
-            !result.code && setUsers(Object.values(result))
+        userService.getAllUsers().then(response => {
+            response.ok && setUsers(Object.values(response))
         }).catch(error => console.log(error))
     }, [])
 

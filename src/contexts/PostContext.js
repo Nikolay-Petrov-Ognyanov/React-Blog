@@ -12,7 +12,7 @@ export const PostProvider = ({ children }) => {
 
     useEffect(() => {
         postService.getAllPosts().then(result => {
-            !result.code && setPosts(Object.values(result))
+            !result.type && setPosts(Object.values(result))
         }).catch(error => console.log(error))
     }, [])
 

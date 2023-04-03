@@ -14,14 +14,16 @@ export const logout = async (accessToken) => {
             }
         })
 
-        return response
+        return response.ok && response
     } catch (error) {
         console.log(error)
     }
 }
 
-export const getAllUsers = () => {
-    return fetch(`http://localhost:3030/jsonstore/users`).then(response => response.json())
+export const getAllUsers = async () => {
+    const response = await fetch(`http://localhost:3030/jsonstore/users`)
+
+    return response.ok && response.json()
 }
 
 
