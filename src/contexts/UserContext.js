@@ -12,10 +12,9 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         userService.getAllUsers().then(response => {
-            response.ok && setUsers(Object.values(response))
+            setUsers(Object.values(response))
         }).catch(error => console.log(error))
     }, [])
-
 
     const loginHandler = (userData) => {
         setUser(userData)

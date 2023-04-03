@@ -26,9 +26,11 @@ export const Profile = () => {
     }, [])
 
     const selectedUser = users.find(u => u.userId === userId)
-    const userPosts = posts.filter(p => p._ownerId === userId)
-    const userLikes = likes.filter(l => l._ownerId === userId && l.like === true)
-        .map(l => posts.find(p => p._id === l.postId))
+    const userPosts = posts.length > 0 && posts.filter(p => p._ownerId === userId) || []
+    const userLikes = likes.length > 0 && likes.filter(l => l._ownerId === userId && l.like === true)
+        .map(l => posts.find(p => p._id === l.postId)) || []
+    
+    console.log(userPosts.length,  userLikes.length)
 
     return (
         <section className={style["profile"]}>

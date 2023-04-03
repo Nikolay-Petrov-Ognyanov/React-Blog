@@ -81,6 +81,20 @@ a {
 	text-shadow: none;
 }
 
+.fa-chevron-left,
+.fa-chevron-right {
+	font-size: 10vw;
+	color: #3DA5FF;
+	background-color: #01121F;
+	border: none;
+}
+
+.fa-chevron-left:hover,
+.fa-chevron-right:hover {
+	cursor: pointer;
+	text-shadow: 0 0 4vw #3DA5FF;
+}
+
 .errors {
 	margin-top: 0.25vw;
 	text-shadow: 0 0 2vw #3DA5FF;

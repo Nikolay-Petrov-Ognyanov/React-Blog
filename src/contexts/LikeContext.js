@@ -6,8 +6,6 @@ import * as likeService from "../services/likeService"
 export const LikeContext = createContext()
 
 export const LikeProvider = ({ children }) => {
-    const navigate = useNavigate()
-
     const [likes, setLikes] = useState([])
 
     useEffect(() => {

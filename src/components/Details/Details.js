@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react"
-import { Link, useParams } from "react-router-dom"
+import { Link, useNavigate, useParams } from "react-router-dom"
 
 import * as likeService from "../../services/likeService"
 import * as postService from "../../services/postService"
@@ -12,12 +12,14 @@ import { LikeContext } from "../../contexts/LikeContext"
 import { ViewContext } from "../../contexts/ViewContext"
 
 export const Details = () => {
+	const navigate = useNavigate()
+
 	const { postId } = useParams()
 
 	const { user, users } = useContext(UserContext)
 	const { deletePostHandler, posts } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
-	const { selectedUserId, selectedView } = useContext(ViewContext)
+	const { selectedView, selectedUserId } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
 
@@ -27,14 +29,45 @@ export const Details = () => {
 		}).catch(error => console.log(error))
 	}, [])
 
-	const postIdList = posts.map(p => p._id)
-	const currentIndex = postIdList.indexOf(postId)
-	const previousIndex = currentIndex >= 1 && currentIndex - 1
-	const nextIndex = currentIndex <= postIdList.length - 2 && currentIndex + 1
-
 	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
 	const isAuthor = user && user._id === post._ownerId
+
+	let postIdList = []
+
+	if (selectedView === "" || selectedView === "home") {
+		postIdList = posts.length > 0 && posts.map(p => p._id)
+	} else if (selectedView === "profile") {
+		if (!!post._ownerId && post._ownerId === selectedUserId) {
+			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
+		} else if (!!post._ownerId && post._ownerId !== selectedUserId) {
+			postIdList = likes.length > 0 &&
+				likes.filter(l => l._ownerId === selectedUserId &&
+					l.like === true).map(l => l.postId)
+		}
+	}
+
+	const currentIndex = postIdList.length > 0 && postIdList.indexOf(postId)
+
+	const handleLeftButton = () => {
+		if (!!postIdList[currentIndex - 1]) {
+			const previousPostId = postIdList[currentIndex - 1]
+			const newPost = posts.find(p => p._id === previousPostId)
+
+			setPost(newPost)
+			navigate(`/${postIdList[currentIndex - 1]}`)
+		}
+	}
+
+	const handleRightButton = () => {
+		if (!!postIdList[currentIndex + 1]) {
+			const nextPostId = postIdList[currentIndex + 1]
+			const newPost = posts.find(p => p._id === nextPostId)
+
+			setPost(newPost)
+			navigate(`/${postIdList[currentIndex + 1]}`)
+		}
+	}
 
 	let currentReaction = null
 	let likesCount = null
@@ -53,7 +86,7 @@ export const Details = () => {
 		currentReaction = newReaction
 
 		likeService.getAllLikes().then(result => {
-			const entry = result.find(e => e.postId === postId && e._ownerId === user._id)
+			const entry = result.find(l => l.postId === postId && l._ownerId === user._id)
 
 			if (entry === undefined) {
 				likeService.createLikeEntry(postId, currentReaction).then(entry => {
@@ -86,85 +119,99 @@ export const Details = () => {
 
 	return (
 		<section className={style["details"]}>
-			<div className={style["details-img-container"]}>
-				<img
-					src={post.imageUrl}
-					className={style["details-img"]}
-					alt={post.title}
-				/>
-			</div>
+			<button
+				onClick={handleLeftButton}
+				className="fa-solid fa-chevron-left"
+				disabled={postIdList.length > 0 && !postIdList[currentIndex - 1]}
+			></button>
 
-			<div className={style["details-text-container"]}>
-				<div className={style["title-wrapper"]}>
-					<h2 className={style["details-title"]}>{post.title}</h2>
-
-					<Link
-						to={post && `/profile/${post._ownerId}`}
-						className={style["author"]}
-					>
-						by {postAuthor?.email}
-					</Link>
+			<div className={style["details-wrapper"]}>
+				<div className={style["details-img-container"]}>
+					<img
+						src={post.imageUrl}
+						className={style["details-img"]}
+						alt={post.title}
+					/>
 				</div>
 
-				<p className={style["details-description"]} >
-					{post.description}
-				</p>
+				<div className={style["details-text-container"]}>
+					<div className={style["title-wrapper"]}>
+						<h2 className={style["details-title"]}>{post.title}</h2>
 
-				<div className={style["details-likes-wrapper"]}>
-					<p className={style["likes-container"]} >
-						{
-							oneLikeNoDislikes && `${likesCount} like` ||
-							noLikesOneDislike && `${dislikesCount} dislike` ||
-							oneLikeOneDislike && `${likesCount} like & ${dislikesCount} dislike` ||
-							multipleLikesNoDislikes && `${likesCount} likes` ||
-							noLikesMultipleDislikes && `${dislikesCount} dislikes` ||
-							multipleLikesOneDislike && `${likesCount} likes & ${dislikesCount} dislike` ||
-							oneLikeMultipleDislikes && `${likesCount} like & ${dislikesCount} dislikes` ||
-							multipleLikesMultipleDislikes && `${likesCount} likes & ${dislikesCount} dislikes`
-						}
+						<Link
+							to={post && `/profile/${post._ownerId}`}
+							className={style["author"]}
+						>
+							by {postAuthor && postAuthor.email}
+						</Link>
+					</div>
+
+					<p className={style["details-description"]} >
+						{post.description}
 					</p>
 
-					{isUser &&
-						<div className="buttons-container">
+					<div className={style["details-likes-wrapper"]}>
+						<p className={style["likes-container"]} >
+							{
+								oneLikeNoDislikes && `${likesCount} like` ||
+								noLikesOneDislike && `${dislikesCount} dislike` ||
+								oneLikeOneDislike && `${likesCount} like & ${dislikesCount} dislike` ||
+								multipleLikesNoDislikes && `${likesCount} likes` ||
+								noLikesMultipleDislikes && `${dislikesCount} dislikes` ||
+								multipleLikesOneDislike && `${likesCount} likes & ${dislikesCount} dislike` ||
+								oneLikeMultipleDislikes && `${likesCount} like & ${dislikesCount} dislikes` ||
+								multipleLikesMultipleDislikes && `${likesCount} likes & ${dislikesCount} dislikes`
+							}
+						</p>
 
-							<button
-								onClick={() => handleLikePost(postId, user, true)}
-								className="button"
-								disabled={currentReaction === true}
-							>
-								Like
-							</button>
+						{isUser &&
+							<div className="buttons-container">
 
-							<button
-								onClick={() => handleLikePost(postId, user, false)}
-								className="button"
-								disabled={currentReaction === false}
-							>
-								Dislike
-							</button>
-						</div>
-					}
+								<button
+									onClick={() => handleLikePost(postId, user, true)}
+									className="button"
+									disabled={currentReaction === true}
+								>
+									Like
+								</button>
 
-					{isAuthor &&
-						<div className="buttons-container">
+								<button
+									onClick={() => handleLikePost(postId, user, false)}
+									className="button"
+									disabled={currentReaction === false}
+								>
+									Dislike
+								</button>
+							</div>
+						}
 
-							<Link
-								to={`/${postId}/edit`}
-								className="button"
-							>
-								Edit
-							</Link>
+						{isAuthor &&
+							<div className="buttons-container">
 
-							<button
-								onClick={() => handleDeletePost(post, user)}
-								className="button"
-							>
-								Delete
-							</button>
-						</div>
-					}
+								<Link
+									to={`/${postId}/edit`}
+									className="button"
+								>
+									Edit
+								</Link>
+
+								<button
+									onClick={() => handleDeletePost(post, user)}
+									className="button"
+								>
+									Delete
+								</button>
+							</div>
+						}
+					</div>
 				</div>
 			</div>
+
+			<button
+				onClick={handleRightButton}
+				className="fa-solid fa-chevron-right"
+				disabled={postIdList.length > 0 && !postIdList[currentIndex + 1]}
+			></button>
 		</section>
 	)
 }
