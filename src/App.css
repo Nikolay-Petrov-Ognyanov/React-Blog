@@ -95,6 +95,12 @@ a {
 	text-shadow: 0 0 4vw #3DA5FF;
 }
 
+.fa-chevron-left:disabled,
+.fa-chevron-right:disabled {
+	color: #446786;
+	pointer-events: none;
+}
+
 .errors {
 	margin-top: 0.25vw;
 	text-shadow: 0 0 2vw #3DA5FF;

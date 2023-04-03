@@ -20,9 +20,13 @@ export const Home = () => {
 
 	return (
 		<section className={style["home"]}>
-			{posts[0] !== 404 && posts.length > 0 && posts.map(post => <Card key={post._id} post={post} />)}
+			{typeof posts[0] !== "number" && posts.length > 0 &&
+				posts.map(post => <Card key={post._id} post={post} />)
+			}
 
-			{posts[0] === 404 && <h1>No posts yet</h1> || posts.length === 0 && <h1>No posts yet</h1>}
+			{typeof posts[0] === "number" && <h1>No posts yet</h1> ||
+				posts.length === 0 && <h1>No posts yet</h1>
+			}
 		</section>
 	)
 }

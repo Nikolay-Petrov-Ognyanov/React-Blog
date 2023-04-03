@@ -12,6 +12,7 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         userService.getAllUsers().then(response => {
+            
             setUsers(Object.values(response))
         }).catch(error => console.log(error))
     }, [])

@@ -9,6 +9,7 @@ import { UserContext } from "../../contexts/UserContext"
 
 export const Login = () => {
 	const navigate = useNavigate()
+	
 	const { loginHandler } = useContext(UserContext)
 
 	const [inputs, setInputs] = useState({
@@ -70,7 +71,7 @@ export const Login = () => {
 			} else {
 				setErrors({ server: result.message + "." })
 			}
-		}).catch(error => console.log(error.message))
+		}).catch(error => console.log(error))
 	}
 
 	return (
