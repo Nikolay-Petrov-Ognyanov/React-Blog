@@ -28,8 +28,8 @@ export const Search = () => {
                     match.includes(p.title) === false &&
                     match.push(p)) &&
                 users.filter(u =>
-                    u.email.includes(!!s && s)).map(s =>
-                        s.userId).map(uid =>
+                    u.email.includes(!!s && s)).map(u =>
+                        u.userId).map(uid =>
                             posts.filter(p =>
                                 p._ownerId === uid)).flat().map(p =>
                                     match.includes(p) === false &&
