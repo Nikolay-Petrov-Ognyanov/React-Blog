@@ -101,6 +101,33 @@ a {
 	opacity: 0%;
 }
 
+.submit {
+	width: 100%;
+	height: 3.6vw;
+	font-size: 2vw;
+	text-align: center;
+	border-radius: 2vw;
+	border-style: none;
+	background-color: #3DA5FF;
+	font-weight: bold;
+}
+
+.submit:hover {
+	cursor: pointer;
+	color: azure;
+	box-shadow: #3DA5FF 0 0 1vw 0.25vw;
+	text-shadow: 0 0 1vw azure;
+}
+
+.submit:disabled,
+.submit:disabled:hover {
+	cursor: auto;
+	background-color: #446786;
+	box-shadow: none;
+	color: #01121F;
+	text-shadow: none;
+}
+
 .errors {
 	margin-top: 0.25vw;
 	text-shadow: 0 0 2vw #3DA5FF;

@@ -15,6 +15,7 @@ import { PostProvider } from "./contexts/PostContext"
 import { LikeProvider } from "./contexts/LikeContext"
 import { Profile } from "./components/Profile/Profile";
 import { ViewProvider } from "./contexts/ViewContext";
+import { Search } from "./components/Search/Search";
 
 function App() {
 	return (
@@ -31,6 +32,7 @@ function App() {
 									<Route path="/register" element={<Register />} />
 									<Route path="/login" element={<Login />} />
 									<Route path="/logout" element={<Logout />} />
+									<Route path="/search" element={<Search />} />
 									<Route path="/create" element={<Create />} />
 									<Route path="profile/:userId" element={<Profile />} />
 									<Route path="/:postId" element={<Details />} />

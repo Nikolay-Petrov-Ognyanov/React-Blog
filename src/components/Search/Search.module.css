@@ -1,0 +1,26 @@
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+	margin: 0 auto 1vw auto;
+}
+
+.search-input {
+    width: 50%;
+    height: 3.6vw;
+    font-size: 2vw;
+    text-align: center;
+    border-radius: 2vw;
+    border: 0.25vw solid #3DA5FF;
+    background-color: #01121F;
+    color: #3DA5FF;
+    margin: 3.7vw 0;
+}
+
+.search-result {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    justify-content: center;
+}

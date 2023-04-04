@@ -103,7 +103,7 @@ export const Login = () => {
 
 				<button
 					type="submit"
-					className={style["user-submit"]}
+					className="submit"
 					disabled={Object.values(errors).some(entry => entry !== "")
 						? true
 						: Object.values(inputs).some(entry => entry === "")}

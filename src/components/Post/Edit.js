@@ -52,7 +52,7 @@ export const Edit = () => {
 			if (name === "title") {
 				if (!value) {
 					stateObject[name] = "Please enter a title."
-				} else if (value && /^[a-zA-Z0-9]*$/.test(value) === false) {
+				} else if (value && /^[a-zA-Z0-9\s]*$/.test(value) === false) {
 					stateObject[name] = "Please enter a valid title."
 				} else if (value && value.length > 12) {
 					stateObject[name] = "Title could be at most 12 characters long."

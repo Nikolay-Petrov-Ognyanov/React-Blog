@@ -22,6 +22,7 @@ export const Header = () => {
 						</>
 						:
 						<>
+							<li><Link to="/search" className="button">Search</Link></li>
 							<li><Link to="/create" className="button">Create</Link></li>
 							<li><Link to={`/profile/${user._id}`} className="button">Profile</Link></li>
 							<li><Link to="/logout" className="button">Logout</Link></li>

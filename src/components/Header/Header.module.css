@@ -3,14 +3,14 @@ header {
 	z-index: 1;
 	background-color: #003E71;
 	width: 100%;
-	padding: 1vw 14.5vw;
+	padding: 1vw 0;
 	border-top: #3DA5FF 0.25vw solid;
 	border-bottom: #3DA5FF 0.25vw solid;
 }
 
 .nav-list {
 	display: flex;
-	justify-content: space-between;
+	justify-content: space-around;
 }
 
 nav li {
