@@ -122,7 +122,11 @@ export const Details = () => {
 			<button
 				onClick={handleLeftButton}
 				className="fa-solid fa-chevron-left"
-				disabled={postIdList.length > 0 && !postIdList[currentIndex - 1]}
+				disabled={
+					postIdList.length === 0 ||
+					postIdList.length > 0 &&
+					!postIdList[currentIndex - 1]
+				}
 			></button>
 
 			<div className={style["details-wrapper"]}>
@@ -218,7 +222,11 @@ export const Details = () => {
 			<button
 				onClick={handleRightButton}
 				className="fa-solid fa-chevron-right"
-				disabled={postIdList.length > 0 && !postIdList[currentIndex + 1]}
+				disabled={
+					postIdList.length === 0 ||
+					postIdList.length > 0 &&
+					!postIdList[currentIndex + 1]
+				}
 			></button>
 		</section>
 	)

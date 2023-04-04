@@ -12,7 +12,7 @@ h2 {
 
 .profile-wrapper {
     display: flex;
-    justify-content: space-evenly
+    justify-content: space-evenly;
 }
 
 .posts-wrapper,

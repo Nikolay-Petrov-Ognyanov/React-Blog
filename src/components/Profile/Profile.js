@@ -29,7 +29,7 @@ export const Profile = () => {
     const userPosts = posts.length > 0 && posts.filter(p => p._ownerId === userId) || []
     const userLikes = likes.length > 0 && likes.filter(l => l._ownerId === userId && l.like === true)
         .map(l => posts.find(p => p._id === l.postId)) || []
-    
+
     return (
         <section className={style["profile"]}>
             <h1>{selectedUser?.email}</h1>
