@@ -21,7 +21,7 @@ export const Home = () => {
 	return (
 		<section className={style["home"]}>
 			{typeof posts[0] !== "number" && posts.length > 0 &&
-				posts.map(post => <Card key={post._id} post={post} />)
+				posts.map(p => <Card key={p._id} post={p} />)
 			}
 
 			{typeof posts[0] === "number" && <h1>No posts yet</h1> ||

@@ -73,13 +73,13 @@ export const Details = () => {
 	let likesCount = null
 	let dislikesCount = null
 
-	if (likes && likes.find(entry => entry.postId === postId)) {
-		likesCount = likes.filter(entry => entry.postId === postId && entry.like === true).length
-		dislikesCount = likes.filter(entry => entry.postId === postId && entry.like === false).length
+	if (likes && likes.find(l => l.postId === postId)) {
+		likesCount = likes.filter(l => l.postId === postId && l.like === true).length
+		dislikesCount = likes.filter(l => l.postId === postId && l.like === false).length
 	}
 
-	if (likes && likes.find(entry => entry.postId === postId && entry._ownerId === user._id)) {
-		currentReaction = likes.find(entry => entry.postId === postId && entry._ownerId === user._id).like
+	if (likes && likes.find(l => l.postId === postId && l._ownerId === user._id)) {
+		currentReaction = likes.find(l => l.postId === postId && l._ownerId === user._id).like
 	}
 
 	const handleLikePost = (postId, user, newReaction) => {
@@ -153,14 +153,22 @@ export const Details = () => {
 					<div className={style["details-likes-wrapper"]}>
 						<p className={style["likes-container"]} >
 							{
-								oneLikeNoDislikes && `${likesCount} like` ||
-								noLikesOneDislike && `${dislikesCount} dislike` ||
-								oneLikeOneDislike && `${likesCount} like & ${dislikesCount} dislike` ||
-								multipleLikesNoDislikes && `${likesCount} likes` ||
-								noLikesMultipleDislikes && `${dislikesCount} dislikes` ||
-								multipleLikesOneDislike && `${likesCount} likes & ${dislikesCount} dislike` ||
-								oneLikeMultipleDislikes && `${likesCount} like & ${dislikesCount} dislikes` ||
-								multipleLikesMultipleDislikes && `${likesCount} likes & ${dislikesCount} dislikes`
+								oneLikeNoDislikes &&
+								`${likesCount} like` ||
+								noLikesOneDislike &&
+								`${dislikesCount} dislike` ||
+								oneLikeOneDislike &&
+								`${likesCount} like & ${dislikesCount} dislike` ||
+								multipleLikesNoDislikes &&
+								`${likesCount} likes` ||
+								noLikesMultipleDislikes &&
+								`${dislikesCount} dislikes` ||
+								multipleLikesOneDislike &&
+								`${likesCount} likes & ${dislikesCount} dislike` ||
+								oneLikeMultipleDislikes &&
+								`${likesCount} like & ${dislikesCount} dislikes` ||
+								multipleLikesMultipleDislikes &&
+								`${likesCount} likes & ${dislikesCount} dislikes`
 							}
 						</p>
 

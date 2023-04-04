@@ -97,8 +97,8 @@ a {
 
 .fa-chevron-left:disabled,
 .fa-chevron-right:disabled {
-	color: #446786;
 	pointer-events: none;
+	opacity: 0%;
 }
 
 .errors {

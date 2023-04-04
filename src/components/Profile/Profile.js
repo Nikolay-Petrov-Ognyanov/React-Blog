@@ -44,7 +44,7 @@ export const Profile = () => {
                         <h2>Posts</h2>
 
                         <div className={style["posts-container"]}>
-                            {userPosts.map(post => post && <Card key={post._id} post={post} />)}
+                            {userPosts.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>
                 </div>
@@ -56,7 +56,7 @@ export const Profile = () => {
                         <h2>Likes</h2>
 
                         <div className={style["likes-container"]}>
-                            {userLikes.map(post => post && <Card key={post._id} post={post} />)}
+                            {userLikes.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>
                 </div>
@@ -68,7 +68,7 @@ export const Profile = () => {
                         <h2>Posts</h2>
 
                         <div className={style["posts-container"]}>
-                            {userPosts.map(post => post && <Card key={post._id} post={post} />)}
+                            {userPosts.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>
 
@@ -76,7 +76,7 @@ export const Profile = () => {
                         <h2>Likes</h2>
 
                         <div className={style["likes-container"]}>
-                            {userLikes.map(post => post && <Card key={post._id} post={post} />)}
+                            {userLikes.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>
                 </div>
