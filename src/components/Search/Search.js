@@ -21,7 +21,7 @@ export const Search = () => {
         localStorage.setItem("userId", null)
 
         setInput({ "search": localStorage.getItem("searchValue") })
-        setSearchResult(JSON.parse(localStorage.getItem("searchResult")))
+        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
     }, [])
 
     const handleInputChange = (event) => {
