@@ -8,7 +8,7 @@
     background-color: #3DA5FF;
     border: none;
     padding: 0;
-    height: 6.5vw;
+    height: 4.7vw;
     width: 18.8vw;
     display: flex;
     align-items: center;
@@ -48,38 +48,34 @@
     display: flex;
     gap: 1vw;
     margin-bottom: -0.25vw;
+    margin-top: 1.6vw;
 }
 
 .profile-wrapper {
-    margin-top: 4.75vw;
+    /* margin-top: 1.75vw; */
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
+    /* padding-top: 2vw; */
 }
 
 .wrapper {
     border-top: 0.25vw solid #3DA5FF;
     width: 100%;
-    padding-top: 1vw;
+    padding-top: 4.7vw;
 }
 
 .container-show,
-.container-show {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1vw;
-    justify-content: center;
-    align-items: center;
-}
-
-.container-hide,
 .container-hide {
     display: flex;
     flex-wrap: wrap;
     gap: 1vw;
     justify-content: center;
     align-items: center;
+}
+
+.container-hide {
     display: none;
 }
 

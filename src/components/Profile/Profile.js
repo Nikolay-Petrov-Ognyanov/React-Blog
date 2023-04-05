@@ -59,8 +59,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >
-                            Posts
+                        >Posts
                         </button>
 
                         <button onClick={() => toggleTab("Likes")}
@@ -70,8 +69,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >
-                            Likes
+                        >Likes
                         </button>
                     </div>
 
@@ -105,8 +103,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >
-                            Posts
+                        >Posts
                         </button>
                     </div>
 
@@ -131,8 +128,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >
-                            Likes
+                        >Likes
                         </button>
                     </div>
 
