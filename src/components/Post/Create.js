@@ -1,11 +1,8 @@
 import { useState, useContext } from "react"
-
-import style from "./Post.module.css"
-
-import * as postService from "../../services/postService"
-
 import { PostContext } from "../../contexts/PostContext"
 import { getRandomImageLink, imageLinks } from "./imageLinks"
+import * as postService from "../../services/postService"
+import style from "./Post.module.css"
 
 export const Create = () => {
     const { createPostHandler } = useContext(PostContext)

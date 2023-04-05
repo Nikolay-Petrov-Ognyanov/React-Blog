@@ -1,10 +1,8 @@
 import { useContext, useEffect } from "react"
-
-import style from "./Home.module.css"
-
-import { PostContext } from "../../contexts/PostContext"
 import { Card } from "../Card/Card"
+import { PostContext } from "../../contexts/PostContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import style from "./Home.module.css"
 
 export const Home = () => {
 	const { posts } = useContext(PostContext)

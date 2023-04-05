@@ -1,7 +1,4 @@
 import { Routes, Route } from "react-router-dom"
-
-import './App.css';
-
 import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
 import { Register } from "./components/User/Register";
@@ -16,6 +13,9 @@ import { LikeProvider } from "./contexts/LikeContext"
 import { Profile } from "./components/Profile/Profile";
 import { ViewProvider } from "./contexts/ViewContext";
 import { Search } from "./components/Search/Search";
+import { UserGuard } from "./components/Guards/UserGuard";
+import { OwnerGuard } from "./components/Guards/OwnerGuard";
+import './App.css';
 
 function App() {
 	return (
@@ -31,12 +31,18 @@ function App() {
 									<Route path="/" element={<Home />} />
 									<Route path="/register" element={<Register />} />
 									<Route path="/login" element={<Login />} />
-									<Route path="/logout" element={<Logout />} />
-									<Route path="/search" element={<Search />} />
-									<Route path="/create" element={<Create />} />
-									<Route path="profile/:userId" element={<Profile />} />
 									<Route path="/:postId" element={<Details />} />
-									<Route path="/:postId/edit" element={<Edit />} />
+
+									<Route element={<UserGuard />}>
+										<Route path="/search" element={<Search />} />
+										<Route path="/create" element={<Create />} />
+										<Route path="profile/:userId" element={<Profile />} />
+										<Route path="/logout" element={<Logout />} />
+
+										<Route element={<OwnerGuard />} >
+											<Route path="/:postId/edit" element={<Edit />} />
+										</Route>
+									</Route>
 								</Routes>
 							</main>
 						</div>

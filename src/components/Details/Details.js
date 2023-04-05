@@ -1,15 +1,12 @@
 import { useState, useEffect, useContext } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
-
-import * as likeService from "../../services/likeService"
-import * as postService from "../../services/postService"
-
-import style from "./Details.module.css"
-
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import * as likeService from "../../services/likeService"
+import * as postService from "../../services/postService"
+import style from "./Details.module.css"
 
 export const Details = () => {
 	const navigate = useNavigate()

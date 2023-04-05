@@ -1,8 +1,6 @@
 import { useState, useEffect, createContext } from "react";
-
-import * as userService from "../services/userService"
-
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import * as userService from "../services/userService"
 
 export const UserContext = createContext()
 
@@ -12,7 +10,6 @@ export const UserProvider = ({ children }) => {
 
     useEffect(() => {
         userService.getAllUsers().then(response => {
-            
             setUsers(Object.values(response))
         }).catch(error => console.log(error))
     }, [])
@@ -37,7 +34,8 @@ export const UserProvider = ({ children }) => {
                 user,
                 users,
                 loginHandler,
-                logoutHandler
+                logoutHandler,
+                isUser: user && !!user.accessToken
             }}
         >
             {children}

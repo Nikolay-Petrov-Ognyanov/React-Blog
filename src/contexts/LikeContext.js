@@ -1,6 +1,5 @@
 import { useEffect, useState, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as likeService from "../services/likeService"
 
 export const LikeContext = createContext()

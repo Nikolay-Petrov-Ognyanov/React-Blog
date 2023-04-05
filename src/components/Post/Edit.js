@@ -1,22 +1,15 @@
 import { useState, useEffect, useContext } from "react"
-
-import * as postService from "../../services/postService"
-
-import style from "./Post.module.css"
-
 import { PostContext } from "../../contexts/PostContext"
 import { useParams } from "react-router-dom"
+import { UserContext } from "../../contexts/UserContext"
+import * as postService from "../../services/postService"
+import style from "./Post.module.css"
 
 export const Edit = () => {
-	const { editPostHandler } = useContext(PostContext)
 	const { postId } = useParams()
 
-	useEffect(() => {
-		postService.getOnePost(postId).then(postData => {
-			setPost(postData)
-			setInputs(postData)
-		}).catch(error => console.log(error))
-	}, [])
+	const { user } = useContext(UserContext)
+	const { editPostHandler } = useContext(PostContext)
 
 	const [post, setPost] = useState({})
 
@@ -31,6 +24,13 @@ export const Edit = () => {
 		imageUrl: "",
 		description: ""
 	})
+
+	useEffect(() => {
+		postService.getOnePost(postId).then(postData => {
+			setPost(postData)
+			setInputs(postData)
+		}).catch(error => console.log(error))
+	}, [])
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target

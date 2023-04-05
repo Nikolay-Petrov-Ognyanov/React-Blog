@@ -1,12 +1,9 @@
 import { useContext, useEffect, useState } from "react"
-
-import style from "./Search.module.css"
-
+import { Card } from "../Card/Card"
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
-
-import { Card } from "../Card/Card"
 import { ViewContext } from "../../contexts/ViewContext"
+import style from "./Search.module.css"
 
 export const Search = () => {
     const { users } = useContext(UserContext)

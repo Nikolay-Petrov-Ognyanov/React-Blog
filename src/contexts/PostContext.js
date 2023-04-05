@@ -1,8 +1,6 @@
 import { useEffect, useState, createContext } from "react";
 import { useNavigate } from "react-router-dom";
-
 import * as postService from "../services/postService"
-import { ViewContext } from "./ViewContext";
 
 export const PostContext = createContext()
 
@@ -33,13 +31,18 @@ export const PostProvider = ({ children }) => {
         setPosts(state => state.filter(post => post._id !== postId))
     }
 
+    const selectPost = (postId) => {
+        return (posts.find(p => p._id === postId))
+    }
+
     return (
         <PostContext.Provider
             value={{
                 posts,
                 createPostHandler,
                 editPostHandler,
-                deletePostHandler
+                deletePostHandler,
+                selectPost
             }}
         >
             {children}

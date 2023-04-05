@@ -1,14 +1,11 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-
-import style from "./Profile.module.css"
-
-import { PostContext } from "../../contexts/PostContext"
-import { LikeContext } from "../../contexts/LikeContext"
-
 import { Card } from "../Card/Card"
 import { UserContext } from "../../contexts/UserContext"
+import { PostContext } from "../../contexts/PostContext"
+import { LikeContext } from "../../contexts/LikeContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import style from "./Profile.module.css"
 
 export const Profile = () => {
     const { userId } = useParams()
