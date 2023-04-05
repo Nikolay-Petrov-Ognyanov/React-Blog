@@ -24,8 +24,8 @@
 }
 
 .details-img-container {
-	height: 38.4vw;
-	width: 38.4vw;
+	height: 38.6vw;
+	width: 38.6vw;
 	border-radius: 2vw;
 	overflow: hidden;
 }
@@ -37,8 +37,8 @@
 }
 
 .details-text-container {
-	height: 38.4vw;
-	width: 38.4vw;
+	height: 38.6vw;
+	width: 38.6vw;
 	border: 0.25vw solid #3DA5FF;
 	border-radius: 2vw;
 	word-wrap: break-word;
