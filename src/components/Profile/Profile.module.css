@@ -1,6 +1,7 @@
 .profile {
     width: 100%;
     text-align: center;
+    margin-bottom: 1.1vw;
 }
 
 .button-title {
@@ -61,7 +62,6 @@
     border-top: 0.25vw solid #3DA5FF;
     width: 100%;
     padding-top: 1vw;
-    padding-bottom: 1vw;
 }
 
 .container-show,
