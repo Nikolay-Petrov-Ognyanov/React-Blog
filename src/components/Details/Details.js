@@ -37,6 +37,8 @@ export const Details = () => {
 
 	if (selectedView === "" || selectedView === "home") {
 		postIdList = posts.length > 0 && posts.map(p => p._id)
+	} else if (selectedView === "search") {
+		postIdList = JSON.parse(localStorage.getItem("searchResult")).map(p => p._id)
 	} else if (selectedView === "profile") {
 		if (!!post._ownerId && post._ownerId === selectedUserId) {
 			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
