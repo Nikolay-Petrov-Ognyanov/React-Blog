@@ -1,7 +1,7 @@
 .profile {
     width: 100%;
     text-align: center;
-    margin-bottom: 1.1vw;
+    margin-bottom: 1vw;
 }
 
 .button-title {
@@ -48,16 +48,14 @@
     display: flex;
     gap: 1vw;
     margin-bottom: -0.25vw;
-    margin-top: 1.6vw;
+    margin-top: 1.75vw;
 }
 
 .profile-wrapper {
-    /* margin-top: 1.75vw; */
     display: flex;
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 2vw; */
 }
 
 .wrapper {

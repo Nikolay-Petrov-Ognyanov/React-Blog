@@ -10,7 +10,7 @@ export const Search = () => {
     const { posts } = useContext(PostContext)
     const { selectView, selectUserId } = useContext(ViewContext)
 
-    const [input, setInput] = useState({ search: "" })
+    const [searchInput, setSearchInput] = useState({ search: "" })
     const [searchResult, setSearchResult] = useState([])
 
     useEffect(() => {
@@ -20,14 +20,14 @@ export const Search = () => {
         localStorage.setItem("view", "search")
         localStorage.setItem("userId", null)
 
-        setInput({ "search": localStorage.getItem("searchValue") })
+        setSearchInput({ "search": localStorage.getItem("searchValue") })
         setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
     }, [])
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
 
-        setInput({ [name]: value })
+        setSearchInput({ [name]: value })
 
         const data = value.split(" ")
         const match = []
@@ -60,7 +60,7 @@ export const Search = () => {
                 type="text"
                 name="search"
                 id="search"
-                value={input.search}
+                value={searchInput.search}
                 onChange={handleInputChange}
             />
 

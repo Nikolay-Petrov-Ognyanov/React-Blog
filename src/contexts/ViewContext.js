@@ -5,6 +5,8 @@ export const ViewContext = createContext()
 export const ViewProvider = ({ children }) => {
     const [selectedView, setSelectedView] = useState("")
     const [selectedUserId, setSelectedUserId] = useState(null)
+    const [input, setInput] = useState({ search: "" })
+    const [searchResult, setSearchResult] = useState([])
 
     useEffect(() => {
         setSelectedView(localStorage.getItem("view") || "")
