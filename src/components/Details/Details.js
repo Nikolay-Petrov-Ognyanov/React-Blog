@@ -107,6 +107,14 @@ export const Details = () => {
 			postService.deletePost(post._id)
 
 			deletePostHandler(post._id)
+
+			if (selectedView === "home") {
+				navigate("/")
+			} else if (selectedView === "search") {
+				navigate("/search")
+			} else if (selectedView === "profile") {
+				navigate(`/profile/${selectedUserId}`)
+			}
 		}
 	}
 

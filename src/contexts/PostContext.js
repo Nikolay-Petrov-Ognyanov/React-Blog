@@ -2,6 +2,7 @@ import { useEffect, useState, createContext } from "react";
 import { useNavigate } from "react-router-dom";
 
 import * as postService from "../services/postService"
+import { ViewContext } from "./ViewContext";
 
 export const PostContext = createContext()
 
@@ -30,8 +31,6 @@ export const PostProvider = ({ children }) => {
 
     const deletePostHandler = (postId) => {
         setPosts(state => state.filter(post => post._id !== postId))
-
-        navigate("/")
     }
 
     return (

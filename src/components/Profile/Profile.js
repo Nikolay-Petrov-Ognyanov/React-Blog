@@ -17,33 +17,107 @@ export const Profile = () => {
     const { likes } = useContext(LikeContext)
     const { selectView, selectUserId } = useContext(ViewContext)
 
+    const selectedUser = users.find(u => u.userId === userId)
+    const userPosts = posts.length > 0 && posts.filter(p => p._ownerId === userId) || []
+    const userLikes = likes.length > 0 && likes.filter(l => l._ownerId === userId && l.like === true)
+        .map(l => posts.find(p => p._id === l.postId)) || []
+
+    const [toggleState, setToggleState] = useState("Posts")
+
     useEffect(() => {
         selectView("profile")
         selectUserId(userId)
 
         localStorage.setItem("view", "profile")
         localStorage.setItem("userId", userId)
+
+        if (userPosts.length > 0 && userLikes.length === 0) {
+            setToggleState("Posts")
+        }
+
+        if (userPosts.length === 0 && userLikes.length > 0) {
+            setToggleState("Likes")
+        }
     }, [])
 
-    const selectedUser = users.find(u => u.userId === userId)
-    const userPosts = posts.length > 0 && posts.filter(p => p._ownerId === userId) || []
-    const userLikes = likes.length > 0 && likes.filter(l => l._ownerId === userId && l.like === true)
-        .map(l => posts.find(p => p._id === l.postId)) || []
+    const toggleTab = (tab) => {
+        setToggleState(tab)
+    }
 
     return (
         <section className={style["profile"]}>
             <h1>{selectedUser?.email}</h1>
 
             {userPosts.length === 0 && userLikes.length === 0 &&
-                <h2>No activity yet</h2>
+                <h2 className={style["no-activity-yet"]} >No activity yet</h2>
+            }
+
+            {userPosts.length > 0 && userLikes.length > 0 &&
+                <div className={style["profile-wrapper"]}>
+                    <div className={style["button-title-container"]}>
+                        <button onClick={() => toggleTab("Posts")}
+                            disabled={toggleState === "Posts"}
+
+                            className={toggleState === "Posts" &&
+                                style["button-title-selected"] ||
+                                style["button-title"]
+                            }
+                        >
+                            Posts
+                        </button>
+
+                        <button onClick={() => toggleTab("Likes")}
+                            disabled={toggleState === "Likes"}
+
+                            className={toggleState === "Likes" &&
+                                style["button-title-selected"] ||
+                                style["button-title"]
+                            }
+                        >
+                            Likes
+                        </button>
+                    </div>
+
+                    <div className={style["wrapper"]}>
+
+                        <div className={toggleState === "Posts" &&
+                            style["container-show"] ||
+                            style["container-hide"]
+                        }>
+                            {userPosts.map(p => p && <Card key={p._id} post={p} />)}
+                        </div>
+
+                        <div className={toggleState === "Likes" &&
+                            style["container-show"] ||
+                            style["container-hide"]
+                        }>
+                            {userLikes.map(p => p && <Card key={p._id} post={p} />)}
+                        </div>
+
+                    </div>
+                </div>
             }
 
             {userPosts.length > 0 && userLikes.length === 0 &&
                 <div className={style["profile-wrapper"]}>
-                    <div>
-                        <h2>Posts</h2>
+                    <div className={style["button-title-container"]}>
+                        <button onClick={() => toggleTab("Posts")}
+                            disabled={toggleState === "Posts"}
 
-                        <div className={style["posts-container"]}>
+                            className={toggleState === "Posts" &&
+                                style["button-title-selected"] ||
+                                style["button-title"]
+                            }
+                        >
+                            Posts
+                        </button>
+                    </div>
+
+                    <div className={style["wrapper"]}>
+                        <div className={toggleState === "Posts" &&
+                            style["container-show"] ||
+                            style["container-hide"]
+                        }>
                             {userPosts.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>
@@ -52,30 +126,24 @@ export const Profile = () => {
 
             {userPosts.length === 0 && userLikes.length > 0 &&
                 <div className={style["profile-wrapper"]}>
-                    <div>
-                        <h2>Likes</h2>
+                    <div className={style["button-title-container"]}>
+                        <button onClick={() => toggleTab("Likes")}
+                            disabled={toggleState === "Likes"}
 
-                        <div className={style["likes-container"]}>
-                            {userLikes.map(p => p && <Card key={p._id} post={p} />)}
-                        </div>
-                    </div>
-                </div>
-            }
-
-            {userPosts.length > 0 && userLikes.length > 0 &&
-                <div className={style["profile-wrapper"]}>
-                    <div className={style["posts-wrapper"]}>
-                        <h2>Posts</h2>
-
-                        <div className={style["posts-container"]}>
-                            {userPosts.map(p => p && <Card key={p._id} post={p} />)}
-                        </div>
+                            className={toggleState === "Likes" &&
+                                style["button-title-selected"] ||
+                                style["button-title"]
+                            }
+                        >
+                            Likes
+                        </button>
                     </div>
 
-                    <div className={style["likes-wrapper"]}>
-                        <h2>Likes</h2>
-
-                        <div className={style["likes-container"]}>
+                    <div className={style["wrapper"]}>
+                        <div className={toggleState === "Likes" &&
+                            style["container-show"] ||
+                            style["container-hide"]
+                        }>
                             {userLikes.map(p => p && <Card key={p._id} post={p} />)}
                         </div>
                     </div>

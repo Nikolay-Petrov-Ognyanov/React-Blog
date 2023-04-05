@@ -1,30 +1,89 @@
-h2 {
-    font-size: 4vw;
-    text-align: center;
-    margin-top: 1.5vw;
-    margin-bottom: 3.5vw;
-}
-
 .profile {
     width: 100%;
-    margin-bottom: 1vw;
+    text-align: center;
+}
+
+.button-title {
+    background-color: #3DA5FF;
+    border: none;
+    padding: 0;
+    height: 6.5vw;
+    width: 18.8vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.6vw;
+    border-style: none;
+    font-weight: bold;
+    color: azure;
+    border-top-left-radius: 1vw;
+    border-top-right-radius: 1vw;
+    border-top: 0.25vw solid #3DA5FF;
+    border-left: 0.25vw solid #3DA5FF;
+    border-right: 0.25vw solid #3DA5FF;
+    border-bottom: 0.25vw solid #3DA5FF;
+    z-index: 1;
+}
+
+.button-title:hover {
+    cursor: pointer;
+    color: azure;
+    box-shadow: #3DA5FF 0 0 1vw 0.25vw;
+    text-shadow: 0 0 1vw azure;
+}
+
+.button-title:disabled {
+    pointer-events: none;
+    cursor: auto;
+    background-color: #446786;
+    box-shadow: none;
+    color: azure;
+    text-shadow: none;
+    background-color: #01121F;
+    border-bottom: 0.25vw solid #01121F;
+}
+
+.button-title-container {
+    display: flex;
+    gap: 1vw;
+    margin-bottom: -0.25vw;
 }
 
 .profile-wrapper {
+    margin-top: 4.75vw;
     display: flex;
     justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
 }
 
-.posts-wrapper,
-.likes-wrapper {
-    width: 38.6vw;
+.wrapper {
+    border-top: 0.25vw solid #3DA5FF;
+    width: 100%;
+    padding-top: 1vw;
+    padding-bottom: 1vw;
 }
 
-.posts-container,
-.likes-container {
+.container-show,
+.container-show {
     display: flex;
     flex-wrap: wrap;
     gap: 1vw;
     justify-content: center;
     align-items: center;
+}
+
+.container-hide,
+.container-hide {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1vw;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+
+.no-activity-yet {
+    margin-top: 5vw;
+    font-size: 3vw;
 }
