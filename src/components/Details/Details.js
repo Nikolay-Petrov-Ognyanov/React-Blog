@@ -19,7 +19,7 @@ export const Details = () => {
 	const { selectedView, selectedUserId } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
-
+	
 	useEffect(() => {
 		postService.getOnePost(postId).then(postData => {
 			setPost(postData)
@@ -56,10 +56,10 @@ export const Details = () => {
 		if (!!postIdList[currentIndex - 1]) {
 			const previousPostId = postIdList[currentIndex - 1]
 			const newPost = posts.find(p => p._id === previousPostId)
-
+			
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex - 1]}`)
-
+			
 			document.removeEventListener("keydown", detectKey)
 		}
 	}
@@ -68,10 +68,10 @@ export const Details = () => {
 		if (!!postIdList[currentIndex + 1]) {
 			const nextPostId = postIdList[currentIndex + 1]
 			const newPost = posts.find(p => p._id === nextPostId)
-
+			
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex + 1]}`)
-
+			
 			document.removeEventListener("keydown", detectKey)
 		}
 	}
@@ -95,7 +95,7 @@ export const Details = () => {
 		dislikesCount = likes.filter(l => l.postId === postId && l.like === false).length
 	}
 
-	if (likes && likes.find(l => l.postId === postId && l._ownerId === user._id)) {
+	if (user && likes && likes.find(l => l.postId === postId && l._ownerId === user._id)) {
 		currentReaction = likes.find(l => l.postId === postId && l._ownerId === user._id).like
 	}
 

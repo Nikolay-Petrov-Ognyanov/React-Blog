@@ -11,8 +11,8 @@ export const ViewProvider = ({ children }) => {
     useEffect(() => {
         setSelectedView(localStorage.getItem("view") || "")
         setSelectedUserId(localStorage.getItem("userId") || null)
-        setSearchInput({ "search": localStorage.getItem("searchValue") })
-        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
+        setSearchInput({ "search": localStorage.getItem("searchValue") || "" })
+        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || [])
     }, [])
 
     const selectView = (currentView) => {

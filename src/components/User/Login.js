@@ -1,12 +1,13 @@
 import { useState, useContext } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { UserContext } from "../../contexts/UserContext"
 import * as userService from "../../services/userService"
 import style from "./User.module.css"
 
 export const Login = () => {
 	const navigate = useNavigate()
-	
+	const location = useLocation()
+
 	const { loginHandler } = useContext(UserContext)
 
 	const [inputs, setInputs] = useState({
@@ -64,7 +65,13 @@ export const Login = () => {
 		userService.login(email, password).then(result => {
 			if (!result.message) {
 				loginHandler(result)
-				navigate("/")
+
+				if (location.state?.from) {
+					navigate(location.state.from)
+				} else {
+					navigate("/")
+				}
+				
 			} else {
 				setErrors({ server: result.message + "." })
 			}
