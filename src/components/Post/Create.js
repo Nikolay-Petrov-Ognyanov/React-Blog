@@ -71,6 +71,8 @@ export const Create = () => {
             postData.imageUrl = getRandomImageLink()
         } else if (imageLinks.includes(postData.imageUrl) === false) {
             console.log(postData.imageUrl)
+        } else if (imageLinks.includes(postData.imageUrl) === true) {
+            console.log("This image is already in the collection.")
         }
 
         postService.createPost(postData).then(result => {
@@ -108,11 +110,11 @@ export const Create = () => {
 
                     <div className="buttons-container">
                         <button className="button"
-                            disabled={Object.values(errors).some(entry => entry !== "")
-                                ? true
-                                : Object.values(inputs)[0] === ""
-                                    ? true
-                                    : Object.values(inputs)[2] === ""}
+                            // disabled={Object.values(errors).some(entry => entry !== "")
+                            //     ? true
+                            //     : Object.values(inputs)[0] === ""
+                            //         ? true
+                            //         : Object.values(inputs)[2] === ""}
                         >Save
                         </button>
 
