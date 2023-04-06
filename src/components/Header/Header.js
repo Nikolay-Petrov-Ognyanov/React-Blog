@@ -7,9 +7,9 @@ export const Header = () => {
 	const { user } = useContext(UserContext)
 
 	return (
-		<header>
+		<header className={user && style["header-user"] || style["header-guest"]} >
 			<nav>
-				<ul role="list" className={style["nav-list"]}>
+				<ul role="list" className={user && style["nav-list-user"] || style["nav-list-guest"]}>
 					<li><Link to="/" className="button">Home</Link></li>
 
 					{user === null

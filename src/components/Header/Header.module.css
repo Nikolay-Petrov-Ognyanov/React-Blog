@@ -1,14 +1,29 @@
-header {
+.header-guest {
 	position: fixed;
 	z-index: 2;
 	background-color: #003E71;
 	width: 100%;
-	padding: 0.95vw 0;
+	padding: 0.95vw 25vw;
 	border-top: #3DA5FF 0.25vw solid;
 	border-bottom: #3DA5FF 0.25vw solid;
 }
 
-.nav-list {
+.nav-list-guest {
+	display: flex;
+	justify-content: space-between;
+}
+
+.header-user {
+	position: fixed;
+	z-index: 2;
+	background-color: #003E71;
+	width: 100%;
+	padding: 0.95vw 0.5vw;
+	border-top: #3DA5FF 0.25vw solid;
+	border-bottom: #3DA5FF 0.25vw solid;
+}
+
+.nav-list-user {
 	display: flex;
 	justify-content: space-around;
 }
