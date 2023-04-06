@@ -7,12 +7,14 @@ export const ViewProvider = ({ children }) => {
     const [selectedUserId, setSelectedUserId] = useState(null)
     const [searchInput, setSearchInput] = useState({ search: "" })
     const [searchResult, setSearchResult] = useState([])
+    const [profileView, setProfileView] = useState("Posts")
 
     useEffect(() => {
         setSelectedView(localStorage.getItem("view") || "")
         setSelectedUserId(localStorage.getItem("userId") || null)
         setSearchInput({ "search": localStorage.getItem("searchValue") || "" })
         setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || [])
+        setProfileView(localStorage.getItem("profileView") || "Posts")
     }, [])
 
     const selectView = (currentView) => {
@@ -31,6 +33,10 @@ export const ViewProvider = ({ children }) => {
         setSearchResult(result)
     }
 
+    const selectProfileView = (view, userId) => {
+        setProfileView(view)
+    }
+
     return (
         <ViewContext.Provider
             value={{
@@ -41,7 +47,9 @@ export const ViewProvider = ({ children }) => {
                 selectSearchInput,
                 searchInput,
                 selectSearchResult,
-                searchResult
+                searchResult,
+                profileView,
+                selectProfileView
             }}
         >
             {children}

@@ -70,8 +70,7 @@ export const Login = () => {
 					navigate(location.state.from)
 				} else {
 					navigate("/")
-				}
-				
+				}	
 			} else {
 				setErrors({ server: result.message + "." })
 			}
