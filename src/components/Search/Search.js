@@ -8,10 +8,18 @@ import style from "./Search.module.css"
 export const Search = () => {
     const { users } = useContext(UserContext)
     const { posts } = useContext(PostContext)
-    const { selectView, selectUserId } = useContext(ViewContext)
 
-    const [searchInput, setSearchInput] = useState({ search: "" })
-    const [searchResult, setSearchResult] = useState([])
+    const {
+        selectView,
+        selectUserId,
+        searchInput,
+        searchResult,
+        selectSearchInput,
+        selectSearchResult
+    } = useContext(ViewContext)
+
+    // const [searchInput, setSearchInput] = useState({ search: "" })
+    // const [searchResult, setSearchResult] = useState([])
 
     useEffect(() => {
         selectView("search")
@@ -20,14 +28,14 @@ export const Search = () => {
         localStorage.setItem("view", "search")
         localStorage.setItem("userId", null)
 
-        setSearchInput({ "search": localStorage.getItem("searchValue") })
-        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
+        // setSearchInput({ "search": localStorage.getItem("searchValue") })
+        // setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
     }, [])
 
     const handleInputChange = (event) => {
         const { name, value } = event.target
 
-        setSearchInput({ [name]: value })
+        selectSearchInput({ [name]: value })
 
         const data = value.split(" ")
         const match = []
@@ -45,7 +53,7 @@ export const Search = () => {
                                 match.includes(p) === false &&
                                 match.push(p)))
 
-        setSearchResult(match)
+        selectSearchResult(match)
 
         localStorage.setItem("searchValue", value)
         localStorage.setItem("searchResult", JSON.stringify(match))

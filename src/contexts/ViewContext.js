@@ -5,12 +5,14 @@ export const ViewContext = createContext()
 export const ViewProvider = ({ children }) => {
     const [selectedView, setSelectedView] = useState("")
     const [selectedUserId, setSelectedUserId] = useState(null)
-    const [input, setInput] = useState({ search: "" })
+    const [searchInput, setSearchInput] = useState({ search: "" })
     const [searchResult, setSearchResult] = useState([])
 
     useEffect(() => {
         setSelectedView(localStorage.getItem("view") || "")
         setSelectedUserId(localStorage.getItem("userId") || null)
+        setSearchInput({ "search": localStorage.getItem("searchValue") })
+        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
     }, [])
 
     const selectView = (currentView) => {
@@ -21,6 +23,14 @@ export const ViewProvider = ({ children }) => {
         setSelectedUserId(userId)
     }
 
+    const selectSearchInput = (input) => {
+        setSearchInput(input)
+    }
+
+    const selectSearchResult = (result) => {
+        setSearchResult(result)
+    }
+
     return (
         <ViewContext.Provider
             value={{
@@ -28,6 +38,10 @@ export const ViewProvider = ({ children }) => {
                 selectedView,
                 selectUserId,
                 selectedUserId,
+                selectSearchInput,
+                searchInput,
+                selectSearchResult,
+                searchResult
             }}
         >
             {children}
