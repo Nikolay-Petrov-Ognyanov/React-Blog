@@ -26,6 +26,10 @@ export const Details = () => {
 		}).catch(error => console.log(error))
 	}, [])
 
+	useEffect(() => {
+		document.addEventListener("keydown", detectKey)
+	}, [post])
+
 	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
 	const isAuthor = user && user._id === post._ownerId
@@ -55,6 +59,8 @@ export const Details = () => {
 
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex - 1]}`)
+
+			document.removeEventListener("keydown", detectKey)
 		}
 	}
 
@@ -65,6 +71,18 @@ export const Details = () => {
 
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex + 1]}`)
+
+			document.removeEventListener("keydown", detectKey)
+		}
+	}
+
+	const detectKey = (event) => {
+		if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+			handleLeftButton()
+		}
+
+		if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+			handleRightButton()
 		}
 	}
 
