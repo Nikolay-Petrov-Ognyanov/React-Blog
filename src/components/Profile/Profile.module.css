@@ -48,7 +48,7 @@
     display: flex;
     gap: 1vw;
     margin-bottom: -0.25vw;
-    margin-top: 1.75vw;
+    margin-top: 1.7vw;
 }
 
 .profile-wrapper {
@@ -61,7 +61,7 @@
 .wrapper {
     border-top: 0.25vw solid #3DA5FF;
     width: 100%;
-    padding-top: 4.7vw;
+    padding-top: 4.65vw;
 }
 
 .container-show,
