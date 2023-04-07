@@ -7,6 +7,8 @@ import style from "./Post.module.css"
 export const Create = () => {
     const { createPostHandler, posts } = useContext(PostContext)
 
+    const imageLinksInUse = posts.map(p => p.imageUrl) || []
+
     const [inputs, setInputs] = useState({
         title: "",
         imageUrl: "",
@@ -45,11 +47,15 @@ export const Create = () => {
                     stateObject[name] = "Title could be at most 12 characters long."
                 }
             } else if (name === "imageUrl") {
-                if (!value && posts.length >= 50) {
+                if (!value && posts.length >= imageLinks.length) {
                     stateObject[name] = "Please enter image link."
-                }else if (value &&
-                    /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
-                        .test(value) === false) {
+                } else if (imageLinks.includes(value)) {
+                    stateObject[name] = "This image is already in the collection."
+                } else if (value != Number(value) || posts.length >= imageLinks.length &&
+                    /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g.test(
+                        value
+                    ) === false
+                ) {
                     stateObject[name] = "Please enter a vaild image link."
                 }
             } else if (name === "description") {
@@ -69,31 +75,42 @@ export const Create = () => {
 
         const postData = Object.fromEntries(new FormData(event.target))
 
-        if (postData.imageUrl === "") {
-            let imageLinksInUse = posts.map(p => p.imageUrl)
-            let randomImageLink = getRandomImageLink()
+        if (postData.imageUrl === "" || postData.imageUrl == Number(postData.imageUrl)) {
+            if (postData.imageUrl === "") {
+                postData.imageUrl = "1"
+            }
 
-            while (imageLinksInUse.includes(randomImageLink)) {
-                if (posts.length >= 50) {
-                    break
+            let postsToCreate = Number(postData.imageUrl)
+
+            if (Number(postData.imageUrl) > imageLinks.length - posts.length) {
+                postsToCreate = imageLinks.length - posts.length
+            }
+
+            for (let i = 0; i < postsToCreate; i++) {
+                let randomImageLink = getRandomImageLink()
+
+                if (imageLinksInUse.includes(randomImageLink)) {
+                    while (imageLinksInUse.includes(randomImageLink)) {
+                        if (posts.length >= imageLinks.length) {
+                            break
+                        }
+
+                        randomImageLink = getRandomImageLink()
+                    }
                 }
 
-                randomImageLink = getRandomImageLink()
-            }
+                if (imageLinksInUse.includes(randomImageLink) === false) {
+                    imageLinksInUse.push(randomImageLink)
 
-            if (imageLinksInUse.includes(randomImageLink) === false) {
-                postData.imageUrl = randomImageLink
-            }
-        } else if (imageLinks.includes(postData.imageUrl) === false) {
-            console.log(postData.imageUrl)
-        } else if (imageLinks.includes(postData.imageUrl) === true) {
-            console.log("This image is already in the collection.")
-        }
+                    postData.imageUrl = randomImageLink
+                }
 
-        if (!!postData.imageUrl) {
-            postService.createPost(postData).then(result => {
-                createPostHandler(result)
-            }).catch(error => console.log(error))
+                if (postData.imageUrl) {
+                    postService.createPost(postData).then(result => {
+                        createPostHandler(result)
+                    }).catch(error => console.log(error))
+                }
+            }
         }
     }
 
@@ -127,11 +144,18 @@ export const Create = () => {
 
                     <div className="buttons-container">
                         <button className="button"
-                        disabled={Object.values(errors).some(entry => entry !== "")
-                            ? true
-                            : Object.values(inputs)[0] === ""
-                                ? true
-                                : Object.values(inputs)[2] === ""}
+                            disabled={
+                                posts.length >= imageLinks.length
+                                    ? Object.values(errors).some(entry => entry !== "")
+                                        ? true
+                                        : Object.values(inputs).some(entry => entry === "")
+                                    : Object.values(errors).some(entry => entry !== "")
+                                        ? true
+                                        : Object.values(inputs)[0] === ""
+                                            ? true
+                                            : Object.values(inputs)[2] === ""
+
+                            }
                         >Save</button>
 
                         <button className="button">Cancel</button>
