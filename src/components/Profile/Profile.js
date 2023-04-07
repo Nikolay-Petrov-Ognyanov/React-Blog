@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react"
 import { useParams } from "react-router-dom"
-import { Card } from "../Card/Card"
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import { Card } from "../Card/Card"
 import style from "./Profile.module.css"
 
 export const Profile = () => {
@@ -17,9 +17,9 @@ export const Profile = () => {
     const {
         selectView,
         selectUserId,
-        profileView,
-        selectProfileView
     } = useContext(ViewContext)
+
+    const [profileView, setProfileView] = useState("Posts")
 
     const selectedUser = users.find(u => u.userId === userId)
     const userPosts = posts.length > 0 && posts.filter(p => p._ownerId === userId) || []
@@ -29,23 +29,23 @@ export const Profile = () => {
     ).map(l => posts.find(p => p._id === l.postId)) || []
 
     useEffect(() => {
-        selectView("profile")
         selectUserId(userId)
+        selectView("profile")
 
-        localStorage.setItem("view", "profile")
         localStorage.setItem("userId", userId)
+        localStorage.setItem("view", "profile")
 
         if (userPosts.length > 0 && userLikes.length === 0) {
-            selectProfileView("Posts")
+            setProfileView("Posts")
         }
 
         if (userPosts.length === 0 && userLikes.length > 0) {
-            selectProfileView("Likes")
+            setProfileView("Likes")
         }
     }, [])
 
-    const toggleView = (view, userId) => {
-        selectProfileView(view, userId)
+    const toggleView = (view) => {
+        setProfileView(view)
 
         localStorage.setItem("profileView", view)
     }

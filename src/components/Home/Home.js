@@ -1,7 +1,7 @@
 import { useContext, useEffect } from "react"
-import { Card } from "../Card/Card"
 import { PostContext } from "../../contexts/PostContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import { Card } from "../Card/Card"
 import style from "./Home.module.css"
 
 export const Home = () => {
@@ -14,7 +14,7 @@ export const Home = () => {
 
 		localStorage.setItem("view", "home")
 		localStorage.setItem("userId", null)
-	}, [])
+	}, [posts])
 
 	return (
 		<section className={style["home"]}>

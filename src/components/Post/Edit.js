@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react"
-import { PostContext } from "../../contexts/PostContext"
 import { useParams } from "react-router-dom"
+import { PostContext } from "../../contexts/PostContext"
 import { UserContext } from "../../contexts/UserContext"
 import * as postService from "../../services/postService"
 import style from "./Post.module.css"

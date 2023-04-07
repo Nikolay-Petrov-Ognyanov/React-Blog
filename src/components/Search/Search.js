@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react"
-import { Card } from "../Card/Card"
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { ViewContext } from "../../contexts/ViewContext"
+import { Card } from "../Card/Card"
 import style from "./Search.module.css"
 
 export const Search = () => {
