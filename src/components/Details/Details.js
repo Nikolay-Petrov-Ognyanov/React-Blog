@@ -19,7 +19,8 @@ export const Details = () => {
 	const { selectedView, selectedUserId } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
-	
+	const [showModal, setShowModal] = useState(false)
+
 	useEffect(() => {
 		postService.getOnePost(postId).then(postData => {
 			setPost(postData)
@@ -56,10 +57,10 @@ export const Details = () => {
 		if (!!postIdList[currentIndex - 1]) {
 			const previousPostId = postIdList[currentIndex - 1]
 			const newPost = posts.find(p => p._id === previousPostId)
-			
+
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex - 1]}`)
-			
+
 			document.removeEventListener("keydown", detectKey)
 		}
 	}
@@ -68,10 +69,10 @@ export const Details = () => {
 		if (!!postIdList[currentIndex + 1]) {
 			const nextPostId = postIdList[currentIndex + 1]
 			const newPost = posts.find(p => p._id === nextPostId)
-			
+
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex + 1]}`)
-			
+
 			document.removeEventListener("keydown", detectKey)
 		}
 	}
@@ -117,20 +118,24 @@ export const Details = () => {
 		}).catch(error => console.log(error))
 	}
 
-	const handleDeletePost = (post) => {
-		if (window.confirm(`Are you sure you want to delete "${post.title}"?`)) {
-			postService.deletePost(post._id)
+	const handleModalYes = () => {
+		setShowModal(false)
 
-			deletePostHandler(post._id)
+		postService.deletePost(post._id)
 
-			if (selectedView === "home") {
-				navigate("/")
-			} else if (selectedView === "search") {
-				navigate("/search")
-			} else if (selectedView === "profile") {
-				navigate(`/profile/${selectedUserId}`)
-			}
+		deletePostHandler(post._id)
+
+		if (selectedView === "home") {
+			navigate("/")
+		} else if (selectedView === "search") {
+			navigate("/search")
+		} else if (selectedView === "profile") {
+			navigate(`/profile/${selectedUserId}`)
 		}
+	}
+
+	const handleModalNo = () => {
+		setShowModal(false)
 	}
 
 	let oneLikeNoDislikes = likesCount === 1 && !dislikesCount
@@ -233,7 +238,7 @@ export const Details = () => {
 								</Link>
 
 								<button
-									onClick={() => handleDeletePost(post, user)}
+									onClick={() => setShowModal(true)}
 									className="button"
 								>
 									Delete
@@ -253,6 +258,28 @@ export const Details = () => {
 					!postIdList[currentIndex + 1]
 				}
 			></button>
+
+			{showModal && <>
+				<div className={style["modal-background"]}></div>
+
+				<div className={style["modal"]}>
+					<p>Are you sure you want to delete "{post.title}"?</p>
+
+					<div className="buttons-container">
+						<button
+							onClick={handleModalYes}
+							className="button">
+							Yes
+						</button>
+
+						<button
+							onClick={handleModalNo}
+							className="button">
+							No
+						</button>
+					</div>
+				</div>
+			</>}
 		</section>
 	)
 }

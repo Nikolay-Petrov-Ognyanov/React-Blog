@@ -16,6 +16,7 @@
 	align-items: center;
 	justify-content: space-evenly;
 	width: 100%;
+	position: relative;
 }
 
 .details-wrapper {
@@ -74,4 +75,33 @@
 
 .details-navigation {
 	cursor: pointer;
+}
+
+.modal-background {
+	position: absolute;
+	background-color: black;
+	opacity: 50%;
+	top: -6.9vw;
+	height: 100vh;
+	width: 100%;
+	z-index: 2;
+}
+
+.modal {
+	position: absolute;
+	border: 0.25vw solid #3DA5FF;
+	padding: 2vw;
+	border-radius: 2vw;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 2vw;
+	z-index: 2;
+	background-color: #01121F;
+}
+
+.modal p {
+	font-weight: 500;
+	font-size: 2vw;
 }
