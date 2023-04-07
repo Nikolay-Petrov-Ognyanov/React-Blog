@@ -27,10 +27,6 @@ export const Details = () => {
 		}).catch(error => console.log(error))
 	}, [])
 
-	useEffect(() => {
-		document.addEventListener("keydown", detectKey)
-	}, [post])
-
 	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
 	const isAuthor = user && user._id === post._ownerId
@@ -45,9 +41,9 @@ export const Details = () => {
 		if (!!post._ownerId && post._ownerId === selectedUserId) {
 			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
 		} else if (!!post._ownerId && post._ownerId !== selectedUserId) {
-			postIdList = likes.length > 0 &&
-				likes.filter(l => l._ownerId === selectedUserId &&
-					l.like === true).map(l => l.postId)
+			likes.filter(
+				l => l._ownerId === selectedUserId && l.like === true
+			).map(l => l.postId)
 		}
 	}
 
@@ -86,6 +82,9 @@ export const Details = () => {
 			handleRightButton()
 		}
 	}
+
+	document.removeEventListener("keydown", detectKey)
+	document.addEventListener("keydown", detectKey)
 
 	let currentReaction = null
 	let likesCount = null
