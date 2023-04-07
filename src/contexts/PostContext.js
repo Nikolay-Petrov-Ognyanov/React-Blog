@@ -11,14 +11,14 @@ export const PostProvider = ({ children }) => {
 
     useEffect(() => {
         postService.getAllPosts().then(result => {
-            !result.type && setPosts(Object.values(result))
+            !result.message && setPosts(Object.values(result))
         }).catch(error => console.log(error))
     }, [])
 
     const createPostHandler = (postData) => {
         setPosts(state => [...state, postData])
 
-        // navigate(`${postData._id}`)
+        navigate(`${postData._id}`)
     }
 
     const editPostHandler = (postId, postData) => {

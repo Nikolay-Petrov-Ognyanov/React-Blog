@@ -128,8 +128,7 @@ export const Register = () => {
 					disabled={Object.values(errors).some(entry => entry !== "")
 						? true
 						: Object.values(inputs).some(entry => entry === "")}
-				>Register
-				</button>
+				>Register</button>
 			</form>
 
 			{errors.email && <p className="errors">{errors.email}</p>}

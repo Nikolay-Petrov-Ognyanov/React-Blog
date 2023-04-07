@@ -50,7 +50,7 @@ export const imageLinks = [
     "https://wallpaperset.com/w/full/b/4/d/171610.jpg",
     "https://wallpaperset.com/w/full/2/f/c/171633.jpg",
     "https://images.unsplash.com/photo-1552845108-5f775a2ccb9b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1171&q=80",
-    "https://unsplash.com/photos/XYmELZSiAGA",
+    "https://wallpapers.com/images/hd/nature-landscape-go05oyj577mpbz7b.jpg",
     "https://wallpaper.dog/large/20395182.jpg",
     "https://cutewallpaper.org/23/android-wallpaper-northwest/2713312226.jpg",
 ]

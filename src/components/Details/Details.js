@@ -40,7 +40,7 @@ export const Details = () => {
 	if (selectedView === "" || selectedView === "home") {
 		postIdList = posts.length > 0 && posts.map(p => p._id)
 	} else if (selectedView === "search") {
-		postIdList = JSON.parse(localStorage.getItem("searchResult")).map(p => p._id)
+		postIdList = JSON.parse(localStorage.getItem("searchResult")).map(p => p._id) || []
 	} else if (selectedView === "profile") {
 		if (!!post._ownerId && post._ownerId === selectedUserId) {
 			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
@@ -180,12 +180,12 @@ export const Details = () => {
 						</Link>
 					</div>
 
-					<p className={style["details-description"]} >
+					<p className={style["details-description"]}>
 						{post.description}
 					</p>
 
 					<div className={style["details-likes-wrapper"]}>
-						<p className={style["likes-container"]} >
+						<p className={style["likes-container"]}>
 							{
 								oneLikeNoDislikes &&
 								`${likesCount} like` ||
@@ -208,22 +208,17 @@ export const Details = () => {
 
 						{isUser &&
 							<div className="buttons-container">
-
 								<button
 									onClick={() => handleLikePost(postId, user, true)}
 									className="button"
 									disabled={currentReaction === true}
-								>
-									Like
-								</button>
+								>Like</button>
 
 								<button
 									onClick={() => handleLikePost(postId, user, false)}
 									className="button"
 									disabled={currentReaction === false}
-								>
-									Dislike
-								</button>
+								>Dislike</button>
 							</div>
 						}
 
@@ -233,16 +228,12 @@ export const Details = () => {
 								<Link
 									to={`/${postId}/edit`}
 									className="button"
-								>
-									Edit
-								</Link>
+								>Edit</Link>
 
 								<button
 									onClick={() => setShowModal(true)}
 									className="button"
-								>
-									Delete
-								</button>
+								>Delete</button>
 							</div>
 						}
 					</div>
@@ -259,27 +250,30 @@ export const Details = () => {
 				}
 			></button>
 
-			{showModal && <>
-				<div className={style["modal-background"]}></div>
+			{showModal &&
+				<>
+					<div
+						onClick={() => setShowModal(false)}
+						className={style["modal-background"]}
+					></div>
 
-				<div className={style["modal"]}>
-					<p>Are you sure you want to delete "{post.title}"?</p>
+					<div className={style["modal"]}>
+						<p>Are you sure you want to delete "{post.title}"?</p>
 
-					<div className="buttons-container">
-						<button
-							onClick={handleModalYes}
-							className="button">
-							Yes
-						</button>
+						<div className="buttons-container">
+							<button
+								onClick={handleModalYes}
+								className="button"
+							>Yes</button>
 
-						<button
-							onClick={handleModalNo}
-							className="button">
-							No
-						</button>
+							<button
+								onClick={handleModalNo}
+								className="button"
+							>No</button>
+						</div>
 					</div>
-				</div>
-			</>}
+				</>
+			}
 		</section>
 	)
 }

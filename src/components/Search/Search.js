@@ -18,18 +18,12 @@ export const Search = () => {
         selectSearchResult
     } = useContext(ViewContext)
 
-    // const [searchInput, setSearchInput] = useState({ search: "" })
-    // const [searchResult, setSearchResult] = useState([])
-
     useEffect(() => {
         selectView("search")
         selectUserId(null)
 
         localStorage.setItem("view", "search")
         localStorage.setItem("userId", null)
-
-        // setSearchInput({ "search": localStorage.getItem("searchValue") })
-        // setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || []) 
     }, [])
 
     const handleInputChange = (event) => {
@@ -41,11 +35,11 @@ export const Search = () => {
         const match = []
 
         data.map(s =>
-            posts.filter(p =>
+            posts && posts.filter(p =>
                 p.title.includes(!!s && s) === true &&
                 match.includes(p.title) === false &&
                 match.push(p)) &&
-            users.filter(u =>
+            users && users.filter(u =>
                 u.email.includes(!!s && s)).map(u =>
                     u.userId).map(uid =>
                         posts.filter(p =>

@@ -5,7 +5,7 @@ import * as postService from "../../services/postService"
 import style from "./Post.module.css"
 
 export const Create = () => {
-    const { createPostHandler } = useContext(PostContext)
+    const { createPostHandler, posts } = useContext(PostContext)
 
     const [inputs, setInputs] = useState({
         title: "",
@@ -68,16 +68,31 @@ export const Create = () => {
         const postData = Object.fromEntries(new FormData(event.target))
 
         if (postData.imageUrl === "") {
-            postData.imageUrl = getRandomImageLink()
+            let imageLinksInUse = posts.map(p => p.imageUrl)
+            let randomImageLink = getRandomImageLink()
+
+            while (imageLinksInUse.includes(randomImageLink)) {
+                if (posts.length >= 50) {
+                    break
+                }
+
+                randomImageLink = getRandomImageLink()
+            }
+
+            if (imageLinksInUse.includes(randomImageLink) === false) {
+                postData.imageUrl = randomImageLink
+            }
         } else if (imageLinks.includes(postData.imageUrl) === false) {
             console.log(postData.imageUrl)
         } else if (imageLinks.includes(postData.imageUrl) === true) {
             console.log("This image is already in the collection.")
         }
 
-        postService.createPost(postData).then(result => {
-            createPostHandler(result)
-        }).catch(error => console.log(error))
+        if (!!postData.imageUrl) {
+            postService.createPost(postData).then(result => {
+                createPostHandler(result)
+            }).catch(error => console.log(error))
+        }
     }
 
     return (
@@ -110,13 +125,12 @@ export const Create = () => {
 
                     <div className="buttons-container">
                         <button className="button"
-                            // disabled={Object.values(errors).some(entry => entry !== "")
-                            //     ? true
-                            //     : Object.values(inputs)[0] === ""
-                            //         ? true
-                            //         : Object.values(inputs)[2] === ""}
-                        >Save
-                        </button>
+                        disabled={Object.values(errors).some(entry => entry !== "")
+                            ? true
+                            : Object.values(inputs)[0] === ""
+                                ? true
+                                : Object.values(inputs)[2] === ""}
+                        >Save</button>
 
                         <button className="button">Cancel</button>
                     </div>

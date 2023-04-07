@@ -118,8 +118,7 @@ export const Edit = () => {
 							disabled={Object.values(errors).some(entry => entry !== "")
 								? true
 								: Object.values(inputs).some(entry => entry === "")}
-						>Save
-						</button>
+						>Save</button>
 
 						<button className="button">Cancel</button>
 					</div>

@@ -66,8 +66,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >Posts
-                        </button>
+                        >Posts</button>
                     </div>
 
                     <div className={style["wrapper"]}>
@@ -91,8 +90,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >Likes
-                        </button>
+                        >Likes</button>
                     </div>
 
                     <div className={style["wrapper"]}>
@@ -116,8 +114,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >Posts
-                        </button>
+                        >Posts</button>
 
                         <button onClick={() => toggleView("Likes")}
                             disabled={profileView === "Likes"}
@@ -126,8 +123,7 @@ export const Profile = () => {
                                 style["button-title-selected"] ||
                                 style["button-title"]
                             }
-                        >Likes
-                        </button>
+                        >Likes</button>
                     </div>
 
                     <div className={style["wrapper"]}>
