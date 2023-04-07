@@ -27,6 +27,11 @@ export const Details = () => {
 		}).catch(error => console.log(error))
 	}, [])
 
+	useEffect(() => {
+		document.removeEventListener("keydown", detectKey)
+		document.addEventListener("keydown", detectKey)
+	}, [posts, post])
+
 	const postAuthor = users.find(u => u.userId === post._ownerId)
 	const isUser = user && user._id !== post._ownerId
 	const isAuthor = user && user._id === post._ownerId
@@ -82,9 +87,6 @@ export const Details = () => {
 			handleRightButton()
 		}
 	}
-
-	document.removeEventListener("keydown", detectKey)
-	document.addEventListener("keydown", detectKey)
 
 	let currentReaction = null
 	let likesCount = null

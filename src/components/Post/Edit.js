@@ -9,7 +9,7 @@ export const Edit = () => {
 	const { postId } = useParams()
 
 	const { user } = useContext(UserContext)
-	const { editPostHandler } = useContext(PostContext)
+	const { editPostHandler, posts } = useContext(PostContext)
 
 	const [post, setPost] = useState({})
 
@@ -58,7 +58,9 @@ export const Edit = () => {
 					stateObject[name] = "Title could be at most 12 characters long."
 				}
 			} else if (name === "imageUrl") {
-				if (value &&
+				if (!value && posts.length >= 50) {
+					stateObject[name] = "Please enter image link."
+				} else if (value &&
 					/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
 						.test(value) === false) {
 					stateObject[name] = "Please enter a vaild image link."
