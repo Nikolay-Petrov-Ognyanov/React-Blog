@@ -46,8 +46,6 @@ export const Profile = () => {
 
     const toggleView = (view) => {
         setProfileView(view)
-
-        localStorage.setItem("profileView", view)
     }
 
     return (
