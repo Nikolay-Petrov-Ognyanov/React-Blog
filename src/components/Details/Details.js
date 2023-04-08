@@ -52,7 +52,7 @@ export const Details = () => {
 		if (!!post._ownerId && post._ownerId === selectedUserId) {
 			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
 		} else if (!!post._ownerId && post._ownerId !== selectedUserId) {
-			likes.filter(
+			postIdList = likes.filter(
 				l => l._ownerId === selectedUserId && l.like === true
 			).map(l => l.postId)
 		}
