@@ -49,13 +49,15 @@ export const Create = () => {
             } else if (name === "imageUrl") {
                 if (!value && posts.length >= imageLinks.length) {
                     stateObject[name] = "Please enter image link."
-                } else if (imageLinks.includes(value)) {
+                } else if (posts.find(p => p.imageUrl === value)) {
                     stateObject[name] = "This image is already in the collection."
-                } else if (value != Number(value) || posts.length >= imageLinks.length &&
+                } else if (value != Number(value) &&
                     /(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g.test(
                         value
                     ) === false
                 ) {
+                    stateObject[name] = "Please enter a vaild image link."
+                } else if (value == Number(value) && posts.length >= imageLinks.length) {
                     stateObject[name] = "Please enter a vaild image link."
                 }
             } else if (name === "description") {
@@ -76,16 +78,23 @@ export const Create = () => {
         const postData = Object.fromEntries(new FormData(event.target))
 
         if (postData.imageUrl === "" || postData.imageUrl == Number(postData.imageUrl)) {
-            if (postData.imageUrl === "") {
-                postData.imageUrl = "1"
-            }
+        }
 
-            let postsToCreate = Number(postData.imageUrl)
+        if (postData.imageUrl === "") {
+            postData.imageUrl = "1"
+        }
 
-            if (Number(postData.imageUrl) > imageLinks.length - posts.length) {
-                postsToCreate = imageLinks.length - posts.length
-            }
+        let postsToCreate = 0
 
+        if (postData.imageUrl == Number(postData.imageUrl)) {
+            postsToCreate = Number(postData.imageUrl)
+        }
+
+        if (Number(postData.imageUrl) > imageLinks.length - posts.length) {
+            postsToCreate = imageLinks.length - posts.length
+        }
+
+        if (postsToCreate) {
             for (let i = 0; i < postsToCreate; i++) {
                 let randomImageLink = getRandomImageLink()
 
@@ -111,6 +120,10 @@ export const Create = () => {
                     }).catch(error => console.log(error))
                 }
             }
+        } else {
+            postService.createPost(postData).then(result => {
+                createPostHandler(result)
+            }).catch(error => console.log(error))
         }
     }
 
