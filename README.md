@@ -48,4 +48,4 @@ The users are able to make new posts, containing title, description and an optio
 
 ### Profile
 
-Logged in users are able to view their own or others' profiles. They include the individual created and liked posts, divided into two tabs.
+Logged-in users are able to view their own or others' profiles. They include the individual created and liked posts, divided into two tabs.
