@@ -58,7 +58,7 @@ export const Edit = () => {
 					stateObject[name] = "Title could be at most 12 characters long."
 				}
 			} else if (name === "imageUrl") {
-				if (!value && posts.length >= 50) {
+				if (!value) {
 					stateObject[name] = "Please enter image link."
 				} else if (value &&
 					/(https:\/\/)([^\s(["<,>/]*)(\/)[^\s[",><]*(.png|.jpg|.jpeg)(\?[^\s[",><]*)?/g
