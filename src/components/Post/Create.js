@@ -8,6 +8,7 @@ export const Create = () => {
     const { createPostHandler, posts } = useContext(PostContext)
 
     const imageLinksInUse = posts.map(p => p.imageUrl) || []
+    const imageLinksFromCollectionUsed = imageLinks.filter(l => imageLinksInUse.includes(l)).length
 
     const [inputs, setInputs] = useState({
         title: "",
@@ -47,7 +48,7 @@ export const Create = () => {
                     stateObject[name] = "Title could be at most 12 characters long."
                 }
             } else if (name === "imageUrl") {
-                if (!value && posts.length >= imageLinks.length) {
+                if (!value && imageLinksFromCollectionUsed >= imageLinks.length) {
                     stateObject[name] = "Please enter image link."
                 } else if (posts.find(p => p.imageUrl === value)) {
                     stateObject[name] = "This image is already in the collection."
@@ -57,7 +58,7 @@ export const Create = () => {
                     ) === false
                 ) {
                     stateObject[name] = "Please enter a vaild image link."
-                } else if (value == Number(value) && posts.length >= imageLinks.length) {
+                } else if (value == Number(value) && imageLinksFromCollectionUsed >= imageLinks.length) {
                     stateObject[name] = "Please enter a vaild image link."
                 }
             } else if (name === "description") {
@@ -90,8 +91,8 @@ export const Create = () => {
             postsToCreate = Number(postData.imageUrl)
         }
 
-        if (Number(postData.imageUrl) > imageLinks.length - posts.length) {
-            postsToCreate = imageLinks.length - posts.length
+        if (Number(postData.imageUrl) > imageLinks.length - imageLinksFromCollectionUsed) {
+            postsToCreate = imageLinks.length - imageLinksFromCollectionUsed
         }
 
         if (postsToCreate) {
@@ -100,7 +101,7 @@ export const Create = () => {
 
                 if (imageLinksInUse.includes(randomImageLink)) {
                     while (imageLinksInUse.includes(randomImageLink)) {
-                        if (posts.length >= imageLinks.length) {
+                        if (imageLinksFromCollectionUsed >= imageLinks.length) {
                             break
                         }
 
@@ -149,7 +150,13 @@ export const Create = () => {
                         type="text"
                         name="imageUrl"
                         id="imageUrl"
-                        placeholder="Enter image link (optional)"
+
+                        placeholder={
+                            imageLinksFromCollectionUsed < imageLinks.length &&
+                            "Enter image link (optional)" ||
+                            "Enter image link"
+                        }
+
                         value={inputs.imageUrl}
                         onChange={handleInputChange}
                         onBlur={validateInput}
@@ -158,7 +165,7 @@ export const Create = () => {
                     <div className="buttons-container">
                         <button className="button"
                             disabled={
-                                posts.length >= imageLinks.length
+                                imageLinksFromCollectionUsed >= imageLinks.length
                                     ? Object.values(errors).some(entry => entry !== "")
                                         ? true
                                         : Object.values(inputs).some(entry => entry === "")

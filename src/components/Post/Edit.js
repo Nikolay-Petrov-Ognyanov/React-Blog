@@ -8,10 +8,7 @@ import style from "./Post.module.css"
 export const Edit = () => {
 	const { postId } = useParams()
 
-	const { user } = useContext(UserContext)
 	const { editPostHandler, posts } = useContext(PostContext)
-
-	const [post, setPost] = useState({})
 
 	const [inputs, setInputs] = useState({
 		title: "",
@@ -27,7 +24,6 @@ export const Edit = () => {
 
 	useEffect(() => {
 		postService.getOnePost(postId).then(postData => {
-			setPost(postData)
 			setInputs(postData)
 		}).catch(error => console.log(error))
 	}, [])
