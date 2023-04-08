@@ -1,11 +1,12 @@
 import { useState, useEffect, useContext } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { PostContext } from "../../contexts/PostContext"
-import { UserContext } from "../../contexts/UserContext"
 import * as postService from "../../services/postService"
 import style from "./Post.module.css"
 
 export const Edit = () => {
+	const navigate = useNavigate()
+
 	const { postId } = useParams()
 
 	const { editPostHandler, posts } = useContext(PostContext)
@@ -23,10 +24,16 @@ export const Edit = () => {
 	})
 
 	useEffect(() => {
-		postService.getOnePost(postId).then(postData => {
-			setInputs(postData)
-		}).catch(error => console.log(error))
-	}, [])
+		if (posts.length > 0) {
+			if (!!posts.find(p => p._id === postId) === false) {
+				navigate("/")
+			} else {
+				postService.getOnePost(postId).then(postData => {
+					setInputs(postData)
+				}).catch(error => console.log(error))
+			}
+		}
+	}, [posts])
 
 	const handleInputChange = (event) => {
 		const { name, value } = event.target

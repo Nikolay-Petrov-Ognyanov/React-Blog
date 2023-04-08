@@ -22,10 +22,16 @@ export const Details = () => {
 	const [showModal, setShowModal] = useState(false)
 
 	useEffect(() => {
-		postService.getOnePost(postId).then(postData => {
-			setPost(postData)
-		}).catch(error => console.log(error))
-	}, [])
+		if (posts.length > 0) {
+			if (!!posts.find(p => p._id === postId) === false) {
+				navigate("/")
+			} else {
+				postService.getOnePost(postId).then(postData => {
+					setPost(postData)
+				}).catch(error => console.log(error))
+			}
+		}
+	}, [posts])
 
 	useEffect(() => {
 		document.removeEventListener("keydown", detectKey)

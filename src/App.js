@@ -43,6 +43,8 @@ function App() {
 											<Route path="/:postId/edit" element={<Edit />} />
 										</Route>
 									</Route>
+
+									<Route path="*" element={<Home />} />
 								</Routes>
 							</main>
 						</div>

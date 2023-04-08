@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { LikeContext } from "../../contexts/LikeContext"
@@ -8,6 +8,8 @@ import { Card } from "../Card/Card"
 import style from "./Profile.module.css"
 
 export const Profile = () => {
+    const navigate = useNavigate()
+
     const { userId } = useParams()
 
     const { users } = useContext(UserContext)
@@ -29,20 +31,26 @@ export const Profile = () => {
     ).map(l => posts.find(p => p._id === l.postId)) || []
 
     useEffect(() => {
-        selectUserId(userId)
-        selectView("profile")
+        if (users.length > 0) {
+            if (!!users.find(u => u.userId === userId) === false) {
+                navigate("/")
+            } else {
+                selectUserId(userId)
+                selectView("profile")
 
-        localStorage.setItem("userId", userId)
-        localStorage.setItem("view", "profile")
+                localStorage.setItem("userId", userId)
+                localStorage.setItem("view", "profile")
 
-        if (userPosts.length > 0 && userLikes.length === 0) {
-            setProfileView("Posts")
+                if (userPosts.length > 0 && userLikes.length === 0) {
+                    setProfileView("Posts")
+                }
+
+                if (userPosts.length === 0 && userLikes.length > 0) {
+                    setProfileView("Likes")
+                }
+            }
         }
-
-        if (userPosts.length === 0 && userLikes.length > 0) {
-            setProfileView("Likes")
-        }
-    }, [])
+    }, [users])
 
     const toggleView = (view) => {
         setProfileView(view)
