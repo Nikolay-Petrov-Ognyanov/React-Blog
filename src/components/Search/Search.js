@@ -37,7 +37,7 @@ export const Search = () => {
         data.map(s =>
             posts && posts.filter(p =>
                 p.title.includes(!!s && s) === true &&
-                match.includes(p.title) === false &&
+                match.includes(p) === false &&
                 match.push(p)) &&
             users && users.filter(u =>
                 u.email.includes(!!s && s)).map(u =>
