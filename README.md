@@ -32,11 +32,11 @@ Preview the selected post's title, author, description, likes and dislikes.
 
 ### Register and Login
 
-In order for the guests to be able to successfully register and/or log in, they are required to fill in valid a email and a password, consisting of at least 5 characters.
+In order for the guests to be able to successfully register and/or log in, they are required to fill in a valid email and a password, consisting of at least 5 characters.
 
 ## Users
 
-The logged in users can also create new posts, which they can also edit or delete. The features "Search", "Profile", "Like" and "Dislike" are present as well.
+The logged-in users can add new posts, which they can also edit or delete. The features "Search", "Profile", "Like" and "Dislike" are available as well.
 
 ### Search 
 
@@ -44,7 +44,7 @@ This algorithm attempts to match the user input with any of the available posts 
 
 ### Create
 
-The users are able to make new posts, containing title, description and an optional image link. If such is not provided, the app will add one randomly chosen from a previously selected list of natural views.
+The users are able to create new posts, containing title, description and an optional image link. If such is not provided, the app will add one randomly chosen from a previously selected list of natural views.
 
 ### Profile
 
