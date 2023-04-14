@@ -1,5 +1,4 @@
 import { Routes, Route } from "react-router-dom"
-import { Home } from './components/Home/Home';
 import { Header } from './components/Header/Header';
 import { Register } from "./components/User/Register";
 import { Login } from "./components/User/Login";
@@ -12,7 +11,7 @@ import { PostProvider } from "./contexts/PostContext"
 import { LikeProvider } from "./contexts/LikeContext"
 import { Profile } from "./components/Profile/Profile";
 import { ViewProvider } from "./contexts/ViewContext";
-import { Search } from "./components/Search/Search";
+import { Posts } from "./components/Posts/Posts";
 import { UserGuard } from "./components/Guards/UserGuard";
 import { OwnerGuard } from "./components/Guards/OwnerGuard";
 import './App.css';
@@ -28,13 +27,12 @@ function App() {
 
 							<main>
 								<Routes>
-									<Route path="/" element={<Home />} />
+									<Route path="/" element={<Posts />} />
 									<Route path="/register" element={<Register />} />
 									<Route path="/login" element={<Login />} />
 									<Route path="/:postId" element={<Details />} />
 
 									<Route element={<UserGuard />}>
-										<Route path="/search" element={<Search />} />
 										<Route path="/create" element={<Create />} />
 										<Route path="profile/:userId" element={<Profile />} />
 										<Route path="/logout" element={<Logout />} />
@@ -44,7 +42,7 @@ function App() {
 										</Route>
 									</Route>
 
-									<Route path="*" element={<Home />} />
+									<Route path="*" element={<Posts />} />
 								</Routes>
 							</main>
 						</div>

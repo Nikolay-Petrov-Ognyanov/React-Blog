@@ -10,7 +10,7 @@ export const Header = () => {
 		<header className={user && style["header-user"] || style["header-guest"]} >
 			<nav>
 				<ul role="list" className={user && style["nav-list-user"] || style["nav-list-guest"]}>
-					<li><Link to="/" className="button">Home</Link></li>
+					<li><Link to="/" className="button">Posts</Link></li>
 
 					{user === null
 						?
@@ -20,7 +20,6 @@ export const Header = () => {
 						</>
 						:
 						<>
-							<li><Link to="/search" className="button">Search</Link></li>
 							<li><Link to="/create" className="button">Create</Link></li>
 							<li><Link to={`/profile/${user._id}`} className="button">Profile</Link></li>
 							<li><Link to="/logout" className="button">Logout</Link></li>

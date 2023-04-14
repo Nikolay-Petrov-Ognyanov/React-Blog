@@ -44,10 +44,12 @@ export const Details = () => {
 
 	let postIdList = []
 
-	if (selectedView === "" || selectedView === "home") {
-		postIdList = posts.length > 0 && posts.map(p => p._id)
-	} else if (selectedView === "search") {
-		postIdList = JSON.parse(localStorage.getItem("searchResult")).map(p => p._id) || []
+	if (selectedView === "posts") {
+		if (localStorage.getItem("postsSearchResult")) {
+			postIdList = JSON.parse(localStorage.getItem("postsSearchResult")).map(p => p._id) || []
+		} else {
+			postIdList = posts.map(p => p._id) || []
+		}
 	} else if (selectedView === "profile") {
 		if (!!post._ownerId && post._ownerId === selectedUserId) {
 			postIdList = posts.filter(p => p._ownerId === selectedUserId).map(p => p._id)
@@ -132,10 +134,8 @@ export const Details = () => {
 
 		deletePostHandler(post._id)
 
-		if (selectedView === "home") {
+		if (selectedView === "posts") {
 			navigate("/")
-		} else if (selectedView === "search") {
-			navigate("/search")
 		} else if (selectedView === "profile") {
 			navigate(`/profile/${selectedUserId}`)
 		}

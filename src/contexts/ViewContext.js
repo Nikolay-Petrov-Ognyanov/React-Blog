@@ -5,14 +5,14 @@ export const ViewContext = createContext()
 export const ViewProvider = ({ children }) => {
     const [selectedView, setSelectedView] = useState("")
     const [selectedUserId, setSelectedUserId] = useState(null)
-    const [searchInput, setSearchInput] = useState({ search: "" })
-    const [searchResult, setSearchResult] = useState([])
+    const [postsSearchInput, setPostsSearchInput] = useState({ posts: "" })
+    const [postsSearchResult, setPostsSearchResult] = useState([])
 
     useEffect(() => {
         setSelectedView(localStorage.getItem("view") || "")
         setSelectedUserId(localStorage.getItem("userId") || null)
-        setSearchInput({ "search": localStorage.getItem("searchValue") || "" })
-        setSearchResult(JSON.parse(localStorage.getItem("searchResult")) || [])
+        setPostsSearchInput({ "posts": localStorage.getItem("postsValue") || "" })
+        setPostsSearchResult(JSON.parse(localStorage.getItem("postsSearchResult")) || [])
     }, [])
 
     const selectView = (currentView) => {
@@ -23,12 +23,12 @@ export const ViewProvider = ({ children }) => {
         setSelectedUserId(userId)
     }
 
-    const selectSearchInput = (input) => {
-        setSearchInput(input)
+    const selectPostsSearchInput = (input) => {
+        setPostsSearchInput(input)
     }
 
-    const selectSearchResult = (result) => {
-        setSearchResult(result)
+    const selectPostsSearchResult = (result) => {
+        setPostsSearchResult(result)
     }
 
     return (
@@ -38,10 +38,10 @@ export const ViewProvider = ({ children }) => {
                 selectedView,
                 selectUserId,
                 selectedUserId,
-                selectSearchInput,
-                searchInput,
-                selectSearchResult,
-                searchResult,
+                selectPostsSearchInput,
+                postsSearchInput,
+                selectPostsSearchResult,
+                postsSearchResult,
             }}
         >
             {children}
