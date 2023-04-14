@@ -45,8 +45,11 @@ export const Details = () => {
 	let postIdList = []
 
 	if (selectedView === "posts") {
-		if (localStorage.getItem("postsSearchResult")) {
+		if (localStorage.getItem("postsSearchResult") && 
+			localStorage.getItem("postsSearchResult") !== "[]") {
 			postIdList = JSON.parse(localStorage.getItem("postsSearchResult")).map(p => p._id) || []
+
+			console.log(postIdList)
 		} else {
 			postIdList = posts.map(p => p._id) || []
 		}
