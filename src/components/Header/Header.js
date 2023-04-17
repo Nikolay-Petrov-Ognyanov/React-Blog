@@ -10,7 +10,7 @@ export const Header = () => {
 		<header className={user && style["header-user"] || style["header-guest"]} >
 			<nav>
 				<ul role="list" className={user && style["nav-list-user"] || style["nav-list-guest"]}>
-					<li><Link to="/" className="button">Posts</Link></li>
+					<li><Link to="/posts" className="button">Posts</Link></li>
 
 					{user === null
 						?

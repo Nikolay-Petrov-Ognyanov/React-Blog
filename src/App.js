@@ -27,7 +27,7 @@ function App() {
 
 							<main>
 								<Routes>
-									<Route path="/" element={<Posts />} />
+									<Route path="/posts" element={<Posts />} />
 									<Route path="/register" element={<Register />} />
 									<Route path="/login" element={<Login />} />
 									<Route path="/:postId" element={<Details />} />

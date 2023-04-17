@@ -34,8 +34,9 @@ export const Details = () => {
 	}, [posts])
 
 	useEffect(() => {
-		document.removeEventListener("keydown", detectKey)
 		document.addEventListener("keydown", detectKey)
+
+		return () => document.removeEventListener("keydown", detectKey)
 	}, [posts, post])
 
 	const postAuthor = users.find(u => u.userId === post._ownerId)
@@ -45,7 +46,7 @@ export const Details = () => {
 	let postIdList = []
 
 	if (selectedView === "posts") {
-		if (localStorage.getItem("postsSearchResult") && 
+		if (localStorage.getItem("postsSearchResult") &&
 			localStorage.getItem("postsSearchResult") !== "[]") {
 			postIdList = JSON.parse(localStorage.getItem("postsSearchResult")).map(p => p._id) || []
 
@@ -72,8 +73,6 @@ export const Details = () => {
 
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex - 1]}`)
-
-			document.removeEventListener("keydown", detectKey)
 		}
 	}
 
@@ -84,8 +83,6 @@ export const Details = () => {
 
 			setPost(newPost)
 			navigate(`/${postIdList[currentIndex + 1]}`)
-
-			document.removeEventListener("keydown", detectKey)
 		}
 	}
 
