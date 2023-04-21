@@ -22,9 +22,9 @@ This app is designed to resemble a web blog. The users are able to view, search,
 
 The guests of the website are able to browse all the present posts, or to register and/or to login, in order to unlock the other features of the app.
 
-### Home
+### Posts
 
-Preview all available posts in chronological order.
+Preview all available posts in chronological order. The search algorithm attempts to match the user input with any of the available posts by their titles and/or authors.
 
 ### Details
 
@@ -37,10 +37,6 @@ In order for the guests to be able to successfully register and/or log in, they 
 ## Users
 
 The logged-in users can add new posts, which they can also edit or delete. The features "Search", "Profile", "Like" and "Dislike" are available as well.
-
-### Search 
-
-This algorithm attempts to match the user input with any of the available posts by their titles and/or authors.
 
 ### Create
 
