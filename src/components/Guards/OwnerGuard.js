@@ -14,6 +14,6 @@ export const OwnerGuard = () => {
     if (!user || post && post._ownerId !== user._id) {
         return <Navigate to={`/${postId}`} replace />
     }
-
+ 
     return <Outlet />
 }

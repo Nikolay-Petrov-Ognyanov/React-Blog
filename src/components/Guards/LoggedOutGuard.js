@@ -4,6 +4,7 @@ import { UserContext } from "../../contexts/UserContext"
 
 export const LoggedOutGuard = () => {
     const navigate = useNavigate()
+    
     const { isUser } = useContext(UserContext)
 
     if (!isUser) {
