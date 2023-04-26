@@ -3,6 +3,7 @@ import { UserContext } from "../../contexts/UserContext"
 import { PostContext } from "../../contexts/PostContext"
 import { ViewContext } from "../../contexts/ViewContext"
 import { Card } from "../Card/Card"
+import * as postService from "../../services/postService"
 import style from "./Posts.module.css"
 
 export const Posts = () => {
@@ -19,12 +20,15 @@ export const Posts = () => {
     } = useContext(ViewContext)
 
     useEffect(() => {
-        selectView("posts")
-        selectUserId(null)
-        selectPostsSearchResult(posts)
+        postService.getAllPosts().then(
+            result => selectPostsSearchResult(result)
+        ).catch(error => console.log(error))
 
         localStorage.setItem("view", "posts")
         localStorage.setItem("userId", null)
+
+        selectView("posts")
+        selectUserId(null)
     }, [])
 
     const handleInputChange = (event) => {
@@ -53,9 +57,6 @@ export const Posts = () => {
         } else {
             selectPostsSearchResult(posts)
         }
-
-        localStorage.setItem("postsValue", value)
-        localStorage.setItem("postsSearchResult", JSON.stringify(match))
     }
 
     return (

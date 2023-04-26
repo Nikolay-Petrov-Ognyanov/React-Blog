@@ -16,7 +16,7 @@ export const Details = () => {
 	const { user, users } = useContext(UserContext)
 	const { deletePostHandler, posts } = useContext(PostContext)
 	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
-	const { selectedView, selectedUserId } = useContext(ViewContext)
+	const { selectedView, selectedUserId, postsSearchResult } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
 	const [showModal, setShowModal] = useState(false)
@@ -46,11 +46,8 @@ export const Details = () => {
 	let postIdList = []
 
 	if (selectedView === "posts") {
-		if (localStorage.getItem("postsSearchResult") &&
-			localStorage.getItem("postsSearchResult") !== "[]") {
-			postIdList = JSON.parse(localStorage.getItem("postsSearchResult")).map(p => p._id) || []
-
-			console.log(postIdList)
+		if (postsSearchResult.length > 0) {
+			postIdList = postsSearchResult.map(p => p._id)
 		} else {
 			postIdList = posts.map(p => p._id) || []
 		}
