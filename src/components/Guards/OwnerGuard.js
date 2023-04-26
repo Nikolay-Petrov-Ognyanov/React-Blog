@@ -11,7 +11,7 @@ export const OwnerGuard = () => {
 
     const post = selectPost(postId)
 
-    if (post && post._ownerId !== user._id) {
+    if (!user || post && post._ownerId !== user._id) {
         return <Navigate to={`/${postId}`} replace />
     }
 

@@ -2,7 +2,7 @@ import { useContext } from "react"
 import { Navigate, Outlet, useLocation } from "react-router-dom"
 import { UserContext } from "../../contexts/UserContext"
 
-export const UserGuard = () => {
+export const LoggedInGuard = () => {
     const location = useLocation()
 
     const { isUser } = useContext(UserContext)

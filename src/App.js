@@ -12,7 +12,8 @@ import { LikeProvider } from "./contexts/LikeContext"
 import { Profile } from "./components/Profile/Profile";
 import { ViewProvider } from "./contexts/ViewContext";
 import { Posts } from "./components/Posts/Posts";
-import { UserGuard } from "./components/Guards/UserGuard";
+import { LoggedInGuard } from "./components/Guards/LoggedInGuard";
+import { LoggedOutGuard } from "./components/Guards/LoggedOutGuard";
 import { OwnerGuard } from "./components/Guards/OwnerGuard";
 import './App.css';
 
@@ -28,18 +29,21 @@ function App() {
 							<main>
 								<Routes>
 									<Route path="/posts" element={<Posts />} />
-									<Route path="/register" element={<Register />} />
-									<Route path="/login" element={<Login />} />
 									<Route path="/:postId" element={<Details />} />
 
-									<Route element={<UserGuard />}>
+									<Route element={<LoggedOutGuard />} >
+										<Route path="/register" element={<Register />} />
+										<Route path="/login" element={<Login />} />
+									</Route>
+
+									<Route element={<LoggedInGuard />}>
 										<Route path="/create" element={<Create />} />
 										<Route path="profile/:userId" element={<Profile />} />
 										<Route path="/logout" element={<Logout />} />
+									</Route>
 
-										<Route element={<OwnerGuard />} >
-											<Route path="/:postId/edit" element={<Edit />} />
-										</Route>
+									<Route element={<OwnerGuard />} >
+										<Route path="/:postId/edit" element={<Edit />} />
 									</Route>
 
 									<Route path="*" element={<Posts />} />
