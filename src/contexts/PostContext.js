@@ -12,7 +12,7 @@ export const PostProvider = ({ children }) => {
     useEffect(() => {
         postService.getAllPosts().then(result => {
             !result.message && setPosts(Object.values(result))
-        }).catch(error => console.log(error))
+        }).catch(error => console.error(error))
     }, [])
 
     const createPostHandler = (postData) => {

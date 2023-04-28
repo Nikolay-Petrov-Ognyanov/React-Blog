@@ -14,8 +14,8 @@ export const Details = () => {
 	const { postId } = useParams()
 
 	const { user, users } = useContext(UserContext)
-	const { deletePostHandler, posts } = useContext(PostContext)
-	const { likes, createLikeHandler, updateLikeHandler } = useContext(LikeContext)
+	const { posts, deletePostHandler } = useContext(PostContext)
+	const { likes, createReactionHandler, updateReactionHandler } = useContext(LikeContext)
 	const { selectedView, selectedUserId, postsSearchResult } = useContext(ViewContext)
 
 	const [post, setPost] = useState({})
@@ -28,7 +28,7 @@ export const Details = () => {
 			} else {
 				postService.getOnePost(postId).then(postData => {
 					setPost(postData)
-				}).catch(error => console.log(error))
+				}).catch(error => console.error(error))
 			}
 		}
 	}, [posts])
@@ -110,18 +110,18 @@ export const Details = () => {
 		currentReaction = newReaction
 
 		likeService.getAllLikes().then(result => {
-			const entry = result.find(l => l.postId === postId && l._ownerId === user._id)
+			const reactionEntry = result.find(l => l.postId === postId && l._ownerId === user._id)
 
-			if (entry === undefined) {
-				likeService.createLikeEntry(postId, currentReaction).then(entry => {
-					createLikeHandler(entry)
-				}).catch(error => console.log(error))
-			} else if (entry.like !== currentReaction) {
-				likeService.updateLikeEntry(entry._id, postId, currentReaction)
+			if (reactionEntry === undefined) {
+				likeService.createReactionEntry(postId, currentReaction).then(entry => {
+					createReactionHandler(entry)
+				}).catch(error => console.error(error))
+			} else if (reactionEntry.like !== currentReaction) {
+				likeService.updateReactionEntry(reactionEntry._id, postId, currentReaction)
 
-				updateLikeHandler(entry._id, { ...entry, like: currentReaction })
+				updateReactionHandler(reactionEntry._id, { ...reactionEntry, like: currentReaction })
 			}
-		}).catch(error => console.log(error))
+		}).catch(error => console.error(error))
 	}
 
 	const handleModalYes = () => {

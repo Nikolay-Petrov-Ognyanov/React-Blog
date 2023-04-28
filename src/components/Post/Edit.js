@@ -30,7 +30,7 @@ export const Edit = () => {
 			} else {
 				postService.getOnePost(postId).then(postData => {
 					setInputs(postData)
-				}).catch(error => console.log(error))
+				}).catch(error => console.error(error))
 			}
 		}
 	}, [posts])
@@ -87,7 +87,7 @@ export const Edit = () => {
 
 		postService.editPost(postId, formData).then(postData => {
 			editPostHandler(postId, postData)
-		}).catch(error => console.log(error))
+		}).catch(error => console.error(error))
 	}
 
 	return (

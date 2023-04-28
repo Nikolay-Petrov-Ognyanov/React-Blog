@@ -16,7 +16,7 @@ export const logout = async (accessToken) => {
 
         return response.ok && response
     } catch (error) {
-        console.log(error)
+        console.error(error)
     }
 }
 

@@ -118,13 +118,13 @@ export const Create = () => {
                 if (postData.imageUrl) {
                     postService.createPost(postData).then(result => {
                         createPostHandler(result)
-                    }).catch(error => console.log(error))
+                    }).catch(error => console.error(error))
                 }
             }
         } else {
             postService.createPost(postData).then(result => {
                 createPostHandler(result)
-            }).catch(error => console.log(error))
+            }).catch(error => console.error(error))
         }
     }
 

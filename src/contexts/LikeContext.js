@@ -9,14 +9,14 @@ export const LikeProvider = ({ children }) => {
     useEffect(() => {
         likeService.getAllLikes().then(result => {
             result && !result.code && setLikes(Object.values(result))
-        }).catch(error => console.log(error))
+        }).catch(error => console.error(error))
     }, [])
 
-    const createLikeHandler = (entry) => {
+    const createReactionHandler = (entry) => {
         setLikes(state => [...state, entry])
     }
 
-    const updateLikeHandler = (entryId, updatedEntry) => {
+    const updateReactionHandler = (entryId, updatedEntry) => {
         setLikes(state => state.map(entry => entry._id === entryId ? updatedEntry : entry))
     }
 
@@ -24,8 +24,8 @@ export const LikeProvider = ({ children }) => {
         <LikeContext.Provider
             value={{
                 likes,
-                createLikeHandler,
-                updateLikeHandler
+                createReactionHandler,
+                updateReactionHandler
             }}
         >
             {children}

@@ -22,7 +22,7 @@ export const Posts = () => {
     useEffect(() => {
         postService.getAllPosts().then(
             result => selectPostsSearchResult(result)
-        ).catch(error => console.log(error))
+        ).catch(error => console.error(error))
 
         localStorage.setItem("view", "posts")
         localStorage.setItem("userId", null)
@@ -73,7 +73,9 @@ export const Posts = () => {
             />
 
             <div className={style["posts-result"]}>
-                {postsSearchResult.map(p => <Card key={p._id} post={p} />)}
+                {postsSearchResult.length > 0 && postsSearchResult.map(
+                    p => <Card key={p._id} post={p} />
+                )}
             </div>
         </section>
     )

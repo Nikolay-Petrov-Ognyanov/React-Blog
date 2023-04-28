@@ -70,11 +70,11 @@ export const Login = () => {
 					navigate(location.state.from)
 				} else {
 					navigate("/")
-				}	
+				}
 			} else {
 				setErrors({ server: result.message + "." })
 			}
-		}).catch(error => console.log(error))
+		}).catch(error => console.error(error))
 	}
 
 	return (
